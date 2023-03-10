@@ -1,9 +1,9 @@
 def precedence(char):
-    if char in "*?+":
+    if char in "*?+()":
         return 3
     elif char in ".":
         return 2
-    elif char in "|()":
+    elif char in "|":
         return 1
     elif char in "1234567890qwertyuioplkjhgfdsazxcvbnm":
         return 0
@@ -39,7 +39,7 @@ def infix_to_postfix(expression):
                 while len(stack) != 0:
                     stack_top = stack.pop()
                     stack.append(stack_top)
-                    if precedence(stack_top) >= precedence(curr_char):
+                    if precedence(stack_top) >= precedence(curr_char) and stack_top != "(":
                         output += stack.pop()
                     else:
                         break
@@ -137,8 +137,8 @@ def build_intro_nfa_table(expression):
 
 
 def kleen_star(nfa_block: _nfa_block, state_count: int):
-    new_starting = {"state": state_count,"input": ["#"], "next_state": [state_count+1], "accepting": False, "starting": True}
-    new_finishing = {"state": state_count+1, "input": ["#"], "next_state": [-1], "accepting": True, "starting": False}
+    new_starting = {"state": state_count+1,"input": ["#"], "next_state": [state_count+1], "accepting": False, "starting": True}
+    new_finishing = {"state": state_count+2, "input": ["#"], "next_state": [-1], "accepting": True, "starting": False}
     state_count += 2
 
 
@@ -174,7 +174,7 @@ def kleen_star(nfa_block: _nfa_block, state_count: int):
 
     nfa_block['states'].append(new_starting)
     nfa_block['states'].append(new_finishing)
-    nfa_block['nfa'] = nfa_block['nfa']+"*"
+    nfa_block['nfa'] = "("+nfa_block['nfa']+"*)"
     nfa_block['type'] = "expression"
     return nfa_block, state_count
 
@@ -213,7 +213,7 @@ def concatenate(nfa_block_a: _nfa_block, nfa_block_b: _nfa_block):
         states.append(state)
 
     return {
-        "nfa" : nfa_block_a["nfa"]+"."+nfa_block_b["nfa"],
+        "nfa" : "("+nfa_block_a["nfa"]+"."+nfa_block_b["nfa"]+")",
         "type" : "expression",
         "states" : states
     }
@@ -227,7 +227,7 @@ def question_mark(nfa_block: _nfa_block):
                     start_state['input'].append('#')
                     start_state['next_state'].append(fin_state['state'])
     nfa_block['type'] = 'expression'
-    nfa_block['nfa'] = nfa_block['nfa']+'?'
+    nfa_block['nfa'] = "("+nfa_block['nfa']+'?)'
     return nfa_block
 
 
@@ -252,15 +252,15 @@ def plus(nfa_block: _nfa_block, state_count: int):
     # add new state to block
     nfa_block['states'].append(new_starting)
 
-    nfa_block['nfa'] = nfa_block['nfa']+"+"
+    nfa_block['nfa'] = "("+nfa_block['nfa']+"+)"
     nfa_block['type'] = "expression"
     return nfa_block, state_count
 
 
 def orr(nfa_block_a: _nfa_block, nfa_block_b: _nfa_block, state_count: int):
     # create new starting and end state
-    new_start_state = {"state": state_count, "input": [], "next_state": [], "accepting": False, "starting": True}
-    end_state = {"state": state_count+1, "input": ["#"], "next_state": ["-1"], "accepting": True, "starting": False}
+    new_start_state = {"state": state_count+1, "input": [], "next_state": [], "accepting": False, "starting": True}
+    end_state = {"state": state_count+2, "input": ["#"], "next_state": ["-1"], "accepting": True, "starting": False}
     state_count += 2
 
     # link initial states to new start state
@@ -315,7 +315,7 @@ def orr(nfa_block_a: _nfa_block, nfa_block_b: _nfa_block, state_count: int):
     states.append(end_state)
 
     return {
-        "nfa" : nfa_block_a["nfa"]+"|"+nfa_block_b["nfa"],
+        "nfa" : "("+nfa_block_a["nfa"]+"|"+nfa_block_b["nfa"]+")",
         "type" : "expression",
         "states" : states
     }, state_count
@@ -335,7 +335,7 @@ def print_state_table(nfa):
                     states['input'][i]) + "\t\t" + str(states['next_state'][i]) + "\t\t\t\t" + str(states['starting']) + '\t\t\t\t' + str(states['accepting']) + "\n")
 
 
-def parser(expression="(a+.b)*.b*|c+"):
+def parser(expression="(a*|b+)*?.a.b"):
     # convert to postfix
     postfix = infix_to_postfix(expression)
     print("postfix\t" + postfix)
@@ -401,7 +401,7 @@ def parser(expression="(a+.b)*.b*|c+"):
             i = 0
         elif symbol['nfa'] == "?":
             print("question_mark")
-            new_block, count = question_mark(stack[i-1], count)
+            new_block = question_mark(stack[i-1])
             stack.pop(i - 1)
             stack[i - 1] = new_block
             i = 0
