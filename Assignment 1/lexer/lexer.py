@@ -1,9 +1,9 @@
 def precedence(char):
-    if char in "*?+()":
+    if char in "*?+":
         return 3
     elif char in ".":
         return 2
-    elif char in "|":
+    elif char in "|()":
         return 1
     elif char in "1234567890qwertyuioplkjhgfdsazxcvbnm":
         return 0
@@ -13,37 +13,37 @@ def infix_to_postfix(expression):
     expression = expression
     output = ""
     stack = []
-    for i in expression:
+    for curr_char in expression:
         # step 1
-        if precedence(i) == 0:
-            output += i
+        if precedence(curr_char) == 0:
+            output += curr_char
         else:
-            if len(stack) == 0:
-                stack.append(i)
-                continue
-            c = stack.pop()
-            stack.append(c)
             # step 2b
-            if i == '(':
-                stack.append(i)
+            if curr_char == '(':
+                stack.append(curr_char)
                 continue
+            if len(stack) == 0:
+                stack.append(curr_char)
+                continue
+            stack_top = stack.pop()
+            stack.append(stack_top)
             # step 2c
-            if i == ')':
-                c = stack.pop()
-                while c != '(':
-                    output += c
-                    c = stack.pop()
+            if curr_char == ')':
+                stack_top = stack.pop()
+                while stack_top != '(':
+                    output += stack_top
+                    stack_top = stack.pop()
                 continue
-            # step 2d
-            if precedence(c) >= precedence(i) and c != '(':
                 # step 2d i
-                while precedence(c) >= precedence(i) and len(stack) != 0:
-                    output += stack.pop()
-                    if len(stack) != 0:
-                        c = stack.pop()
-                        stack.append(c)
-                # step 2d ii
-            stack.append(i)
+            else:
+                while len(stack) != 0:
+                    stack_top = stack.pop()
+                    stack.append(stack_top)
+                    if precedence(stack_top) >= precedence(curr_char):
+                        output += stack.pop()
+                    else:
+                        break
+                stack.append(curr_char)
     while len(stack) != 0:
         output += stack.pop()
 
@@ -335,7 +335,7 @@ def print_state_table(nfa):
                     states['input'][i]) + "\t\t" + str(states['next_state'][i]) + "\t\t\t\t" + str(states['starting']) + '\t\t\t\t' + str(states['accepting']) + "\n")
 
 
-def parser(expression="a?|b*"):
+def parser(expression="(a+.b)*.b*|c+"):
     # convert to postfix
     postfix = infix_to_postfix(expression)
     print("postfix\t" + postfix)
@@ -347,42 +347,86 @@ def parser(expression="a?|b*"):
     print_state_table(nfa_table)
 
     # split into symbol and operand stacks for processing
-    symbol_stack = []
-    operand_stack = []
+    # symbol_stack = []
+    # operand_queue = []
+    # for nfa_block in nfa_table:
+    #     if nfa_block['type'] == 'symbol':
+    #         symbol_stack.append(nfa_block)
+    #     else:
+    #         operand_queue.append(nfa_block)
+
+    stack = []
     for nfa_block in nfa_table:
         if nfa_block['type'] == 'symbol':
-            symbol_stack.append(nfa_block)
+            stack.append(nfa_block)
         else:
-            operand_stack.append(nfa_block)
+            stack.append(nfa_block)
 
     # reverse symbol stack for processing
     # symbol_stack.reverse()
 
     # process symbol stack
-    for symbol in symbol_stack:
-        print_state_table(operand_stack)
+    # for symbol in symbol_stack:
+    #     print_state_table(operand_queue)
+    #     if symbol['nfa'] == "*":
+    #         print("star")
+    #         new_block, count = kleen_star(operand_queue.pop(0), count)
+    #         operand_queue.append(new_block)
+    #     elif symbol['nfa'] == "?":
+    #         print("question_mark")
+    #         new_block = question_mark(operand_queue.pop(0))
+    #         operand_queue.insert(new_block, 0)
+    #     elif symbol['nfa'] == "+":
+    #         print("plus")
+    #         new_block, count = plus(operand_queue.pop(0), count)
+    #         operand_queue.insert(new_block, 0)
+    #     elif symbol['nfa'] == ".":
+    #         print("concat")
+    #         new_block = concatenate(operand_queue.pop(0), operand_queue.pop(0))
+    #         operand_queue.append(new_block)
+    #     elif symbol['nfa'] == "|":
+    #         print("or")
+    #         new_block, count = orr(operand_queue.pop(0), operand_queue.pop(0), count)
+    #         operand_queue.append(new_block)
+
+    i = -1
+    while len(stack) != 1:
+        i += 1
+        symbol = stack[i]
         if symbol['nfa'] == "*":
             print("star")
-            new_block, count = kleen_star(operand_stack.pop(), count)
-            operand_stack.append(new_block)
+            new_block, count = kleen_star(stack[i-1], count)
+            stack.pop(i - 1)
+            stack[i - 1] = new_block
+            i = 0
         elif symbol['nfa'] == "?":
             print("question_mark")
-            new_block = question_mark(operand_stack.pop())
-            operand_stack.append(new_block)
+            new_block, count = question_mark(stack[i-1], count)
+            stack.pop(i - 1)
+            stack[i - 1] = new_block
+            i = 0
         elif symbol['nfa'] == "+":
             print("plus")
-            new_block, count = plus(operand_stack.pop(), count)
-            operand_stack.append(new_block)
+            new_block, count = plus(stack[i-1], count)
+            stack.pop(i - 1)
+            stack[i-1] = new_block
+            i = 0
         elif symbol['nfa'] == ".":
             print("concat")
-            new_block = concatenate(operand_stack.pop(), operand_stack.pop())
-            operand_stack.append(new_block)
+            new_block = concatenate(stack[i-2], stack[i-1])
+            stack.pop(i - 1)
+            stack.pop(i - 1)
+            stack[i - 2] = new_block
+            i = 0
         elif symbol['nfa'] == "|":
             print("or")
-            new_block, count = orr(operand_stack.pop(), operand_stack.pop(), count)
-            operand_stack.append(new_block)
+            new_block, count = orr(stack[i - 2], stack[i - 1], count)
+            stack.pop(i-1)
+            stack.pop(i-1)
+            stack[i-2] = new_block
+            i = 0
 
     # print final NFA
-    print_state_table(operand_stack)
+    print_state_table(stack)
 
 parser()
