@@ -76,11 +76,25 @@ def validate_regex(expression):
     return True
 
 
-def reformat_regex(expression: str):
-    expr = expression.split()
-    for i in range(0, len(expr) - 1):
-        if expr[i] in "qwertyuioplkjhgfdsazxcvbnm" and expr[i + 1] in "qwertyuioplkjhgfdsazxcvbnm":
-            expr.insert(i, ".")
+def add_dot(regex):
+    output = ''
+
+    for i, char in enumerate(regex):
+        if char == '(' and i != 0:
+            if regex[i-1] in "|(":
+                output += "("
+            else:
+                output += '.('
+            continue
+        elif char in "*?|+":
+            output += char
+            continue
+        elif char.isalnum() and i != 0:
+            if regex[i-1] not in "(|":
+                output += '.'
+        output += char
+    return output
+
 
 
 # input_table = ""
@@ -335,8 +349,15 @@ def print_state_table(nfa):
                     states['input'][i]) + "\t\t" + str(states['next_state'][i]) + "\t\t\t\t" + str(states['starting']) + '\t\t\t\t' + str(states['accepting']) + "\n")
 
 
-def parser(expression="(a*|b+)*?.a.b"):
+def parser(expression="(a*|b+)*?ab", validator="(a*|b+)*?.a.b"):
+    # add dots for concatenation
+    expression = add_dot(expression)
+    if expression != validator:
+        print("ERROR################################")
+        return 0
+
     # convert to postfix
+    print("expression\t"+ expression)
     postfix = infix_to_postfix(expression)
     print("postfix\t" + postfix)
 
@@ -346,48 +367,12 @@ def parser(expression="(a*|b+)*?.a.b"):
     # initial nfa blocks
     print_state_table(nfa_table)
 
-    # split into symbol and operand stacks for processing
-    # symbol_stack = []
-    # operand_queue = []
-    # for nfa_block in nfa_table:
-    #     if nfa_block['type'] == 'symbol':
-    #         symbol_stack.append(nfa_block)
-    #     else:
-    #         operand_queue.append(nfa_block)
-
     stack = []
     for nfa_block in nfa_table:
         if nfa_block['type'] == 'symbol':
             stack.append(nfa_block)
         else:
             stack.append(nfa_block)
-
-    # reverse symbol stack for processing
-    # symbol_stack.reverse()
-
-    # process symbol stack
-    # for symbol in symbol_stack:
-    #     print_state_table(operand_queue)
-    #     if symbol['nfa'] == "*":
-    #         print("star")
-    #         new_block, count = kleen_star(operand_queue.pop(0), count)
-    #         operand_queue.append(new_block)
-    #     elif symbol['nfa'] == "?":
-    #         print("question_mark")
-    #         new_block = question_mark(operand_queue.pop(0))
-    #         operand_queue.insert(new_block, 0)
-    #     elif symbol['nfa'] == "+":
-    #         print("plus")
-    #         new_block, count = plus(operand_queue.pop(0), count)
-    #         operand_queue.insert(new_block, 0)
-    #     elif symbol['nfa'] == ".":
-    #         print("concat")
-    #         new_block = concatenate(operand_queue.pop(0), operand_queue.pop(0))
-    #         operand_queue.append(new_block)
-    #     elif symbol['nfa'] == "|":
-    #         print("or")
-    #         new_block, count = orr(operand_queue.pop(0), operand_queue.pop(0), count)
-    #         operand_queue.append(new_block)
 
     i = -1
     while len(stack) != 1:
@@ -429,4 +414,7 @@ def parser(expression="(a*|b+)*?.a.b"):
     # print final NFA
     print_state_table(stack)
 
-parser()
+
+print(parser())
+
+
