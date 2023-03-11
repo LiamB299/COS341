@@ -151,7 +151,7 @@ def build_intro_nfa_table(expression):
 
 
 def kleen_star(nfa_block: _nfa_block, state_count: int):
-    new_starting = {"state": state_count+1,"input": ["#"], "next_state": [state_count+1], "accepting": False, "starting": True}
+    new_starting = {"state": state_count+1,"input": ["#"], "next_state": [state_count+2], "accepting": False, "starting": True}
     new_finishing = {"state": state_count+2, "input": ["#"], "next_state": [-1], "accepting": True, "starting": False}
     state_count += 2
 
@@ -342,14 +342,14 @@ def print_state_table(nfa):
             continue
         count += 1
         print("\n\nblock:\t"+str(count))
-        print("nfa\t\tstate\tinput\tnext_state\t\tstarting_state\t\taccepting_state")
+        print("nfa\t\t\t\tstate\tinput\tnext_state\t\tstarting_state\t\taccepting_state")
         for states in nfa_block_internal['states']:
             for i in range(0, len(states['next_state'])):
-                print(nfa_block_internal['nfa'] + "\t\t" + str(states['state']) + "\t\t" + str(
+                print(nfa_block_internal['nfa'] + "\t\t\t\t" + str(states['state']) + "\t\t" + str(
                     states['input'][i]) + "\t\t" + str(states['next_state'][i]) + "\t\t\t\t" + str(states['starting']) + '\t\t\t\t' + str(states['accepting']) + "\n")
 
 
-def parser(expression="(a*|b+)*?ab", validator="(a*|b+)*?.a.b"):
+def parser(expression="00(01|10)*11*", validator="0.0.(0.1|1.0)*.1.1*"):
     # add dots for concatenation
     expression = add_dot(expression)
     if expression != validator:
