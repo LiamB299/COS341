@@ -159,9 +159,9 @@ def remove_no_move_state(nfa_block: _nfa_block):
 
 
 def kleen_star(nfa_block: _nfa_block, state_count: int):
-    new_starting = {"state": state_count + 1, "input": ["#"], "next_state": [state_count + 2], "accepting": False,
+    new_starting = {"state": state_count, "input": ["#"], "next_state": [state_count + 1], "accepting": False,
                     "starting": True}
-    new_finishing = {"state": state_count + 2, "input": ["#"], "next_state": [-1], "accepting": True, "starting": False}
+    new_finishing = {"state": state_count + 1, "input": ["#"], "next_state": [-1], "accepting": True, "starting": False}
     state_count += 2
 
     for state in nfa_block['states']:
@@ -236,8 +236,8 @@ def question_mark(nfa_block: _nfa_block):
 
 
 def plus(nfa_block: _nfa_block, state_count: int):
-    state_count += 1
     new_starting = {"state": state_count, "input": [], "next_state": [], "accepting": False, "starting": True}
+    state_count += 1
 
     for start_state in nfa_block['states']:
         if start_state['starting']:
@@ -263,8 +263,8 @@ def plus(nfa_block: _nfa_block, state_count: int):
 
 def orr(nfa_block_a: _nfa_block, nfa_block_b: _nfa_block, state_count: int):
     # create new starting and end state
-    new_start_state = {"state": state_count + 1, "input": [], "next_state": [], "accepting": False, "starting": True}
-    end_state = {"state": state_count + 2, "input": ["#"], "next_state": [-1], "accepting": True, "starting": False}
+    new_start_state = {"state": state_count, "input": [], "next_state": [], "accepting": False, "starting": True}
+    end_state = {"state": state_count + 1, "input": ["#"], "next_state": [-1], "accepting": True, "starting": False}
     state_count += 2
 
     # link initial states to new start state
@@ -389,3 +389,7 @@ def parser(expression="00(01|10)*11*", validator="0.0.(0.1|1.0)*.1.1*"):
 
     # print final NFA
     print_state_table(stack)
+
+    return stack[0]
+
+# parser("a+|b*", "a+|b*")
