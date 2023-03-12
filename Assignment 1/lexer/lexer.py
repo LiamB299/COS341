@@ -117,6 +117,7 @@ def build_dfa(nfa: _nfa_block, power_closures):
                     # if one of single state sets and is the closure desired
                     if len(closure['set']) == 1 and closure['set'][0] == find_closure:
                         closure_set = closure['closure']
+                        closure_set.sort()
                         _input.append(state_input)
                         next_state.append({"label":closure["label"], "state": closure_set})
                         break
@@ -138,13 +139,13 @@ def build_dfa(nfa: _nfa_block, power_closures):
         power_transitions.append({"state":closure_set['set'], "input":bigger_trans_set_input, "next_state":bigger_trans_set_next_state, "accepting":False, "starting":False})
 
 
-    pop_index = []
-    for i, state in enumerate(power_transitions):
-        if len(state['input']) == 0:
-            pop_index.append(i)
-
-    for i in range(len(pop_index)-1, 0, -1):
-        power_transitions.pop(pop_index[i])
+    # pop_index = []
+    # for i, state in enumerate(power_transitions):
+    #     if len(state['input']) == 0:
+    #         pop_index.append(i)
+    #
+    # for i in range(len(pop_index)-1, 0, -1):
+    #     power_transitions.pop(pop_index[i])
 
     for old_state in nfa['states']:
         if old_state['starting']:
@@ -178,23 +179,86 @@ def build_dfa(nfa: _nfa_block, power_closures):
                     if number == find:
                         state['accepting'] = True
 
+    # turn state array into string
+    for state in power_transitions:
+        state['state'] = str(state['state'])
+        for next_state in state['next_state']:
+            next_state['state'] = str(next_state['state'])
+
+
     # return DFA
     return {
         "dfa" : "un-minimized", "states" : power_transitions
     }
 
 
+def reduce_dfa_states(dfa):
+    # find starting state
+    for starting_state in dfa['states']:
+        if starting_state['starting']:
+            break
+
+    # transverse dfa
+    visited = [starting_state['state']]
+    for transition_states in starting_state['next_state']:
+        traverse_dfa(dfa, transition_states['state'], visited)
+
+
+    # remove untagged states
+    print("reducing states...")
+    reachable_states = []
+    for old_state in dfa['states']:
+        for visited_state in visited:
+            if visited_state == old_state['state']:
+                reachable_states.append(old_state)
+
+    dfa['states'] = reachable_states
+
+
+def traverse_dfa(dfa, current_state: str, visited: []):
+    for state in visited:
+        if state == current_state:
+            return
+
+    # this state is visited
+    visited.append(current_state)
+
+    # get current state
+    found = False
+    for state in dfa['states']:
+        c_state = state['state']
+        if c_state == current_state:
+            found = True
+            break
+
+    if not found:
+        print("ERROR++++++++++++++++++++++++++++++++++++++")
+        return
+
+    # go to next state
+    for transition_states in state['next_state']:
+        if transition_states['state'] not in visited:
+            traverse_dfa(dfa, transition_states['state'], visited)
+
+
 def print_dfa(dfa):
-    print("state\t\t\tinput\t\t\tnext_state\t\t\tstarting\t\t\taccepting")
     print("DFA")
     print("Non Minimized")
+    print("state\t\t\tinput\t\t\tnext_state\t\t\tstarting\t\t\taccepting")
     for state in dfa['states']:
         for i, _input in enumerate(state['input']):
             print(str(state["state"]) +"\t\t\t\t\t" + str(_input) + '\t\t\t\t\t' +
                   str(state['next_state'][i]['state']) +"\t\t\t\t\t" + str(state['starting']) +"\t\t\t\t\t" + str(state['accepting']))
+        else:
+            if state['accepting'] or state['starting']:
+                print(str(state["state"]) + "\t\t\t\t\t" + "[]" + '\t\t\t\t\t' +
+                      "[]" + "\t\t\t\t\t" + str(state['starting']) + "\t\t\t\t\t" + str(
+                    state['accepting']))
 
 
-nfa = parser("a|b", "a|b")
+nfa = parser("a?b*c", "a?.b*.c")
 power_closures, x = generate_power_closures(nfa)
-print_dfa(build_dfa(nfa, power_closures))
+dfa = build_dfa(nfa, power_closures)
+reduce_dfa_states(dfa)
+print_dfa(dfa)
 
