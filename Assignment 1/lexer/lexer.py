@@ -53,5 +53,148 @@ def visit_state(nfa: _nfa_block, current_state: int, visited : []):
                 visit_state(nfa, state['next_state'][i], visited)
 
 
+def generate_power_closures(nfa: _nfa_block):
+    # generate closures
+    basic_closures = generate_basic_closures(nfa)
+    print(basic_closures)
+
+    # generate powerset
+    powerset = generate_powerset(nfa)
+
+    power_closures = []
+    count = 1
+    for set in powerset:
+        current_closure = []
+        for state in set:
+            for closure in basic_closures[state-1]['closure']:
+                current_closure.append(closure)
+        res = []
+        [res.append(x) for x in current_closure if x not in res]
+        current_closure = res
+        power_closures.append({"set":set, "label":count, "closure":current_closure})
+        count += 1
+
+    return power_closures, powerset
+
+
+# check if set has accepting and/or starting state
+def is_accepting_starting(nfa: _nfa_block, states: []):
+    starting = False
+    accepting = False
+
+    for state in nfa["states"]:
+        for set_state in states:
+            if state["state"] == set_state:
+                if state['accepting']:
+                    accepting = True
+                if state['starting']:
+                    starting = True
+        if accepting and starting:
+            break
+
+    return accepting, starting
+
+
+def build_dfa(nfa: _nfa_block, power_closures):
+    # dfa
+    _transition_table = []
+
+    # new state count
+    count = 1
+
+    # generate base transition table
+    for state in nfa['states']:
+        _input = []
+        next_state = []
+        # iterate through states and inputs of nfa
+        for i, state_input in enumerate(state['input']):
+            if state_input == "#":
+                continue
+            else:
+                # lookup closure for state transitioned to
+                find_closure = state['next_state'][i]
+                for closure in power_closures:
+                    # if one of single state sets and is the closure desired
+                    if len(closure['set']) == 1 and closure['set'][0] == find_closure:
+                        closure_set = closure['closure']
+                        _input.append(state_input)
+                        next_state.append({"label":closure["label"], "state": closure_set})
+                        break
+
+        if len(_input) != 0:
+            _transition_table.append({"state":state["state"], "input": _input, "next_state":next_state})
+
+    print(_transition_table)
+
+    power_transitions = []
+    for closure_set in power_closures:
+        bigger_trans_set_input = []
+        bigger_trans_set_next_state= []
+        for new_trans_state in _transition_table:
+            if new_trans_state['state'] in closure_set['set']:
+                for i, _input in enumerate(new_trans_state["input"]):
+                    bigger_trans_set_input.append(_input)
+                    bigger_trans_set_next_state.append({"label":"", "state": new_trans_state['next_state'][i]['state']})
+        power_transitions.append({"state":closure_set['set'], "input":bigger_trans_set_input, "next_state":bigger_trans_set_next_state, "accepting":False, "starting":False})
+
+
+    pop_index = []
+    for i, state in enumerate(power_transitions):
+        if len(state['input']) == 0:
+            pop_index.append(i)
+
+    for i in range(len(pop_index)-1, 0, -1):
+        power_transitions.pop(pop_index[i])
+
+    for old_state in nfa['states']:
+        if old_state['starting']:
+            for closure in power_closures:
+                if len(closure['set']) == 1:
+                    closure_set = closure['set'][0]
+                    state_num = old_state['state']
+                    if closure_set == state_num:
+                        start_closure = closure['closure']
+                        break
+
+    # find starting state
+    start_closure.sort()
+    for state in power_transitions:
+        if len(state['state']) == len(start_closure):
+            found = True
+            for i, item in enumerate(state['state']):
+                if item != start_closure[i]:
+                    found = False
+                    break
+            if found:
+                state['starting'] = True
+                break
+
+    # define accepting states
+    for old_state in nfa['states']:
+        if old_state['accepting']:
+            find = old_state['state']
+            for state in power_transitions:
+                for number in state['state']:
+                    if number == find:
+                        state['accepting'] = True
+
+    # return DFA
+    return {
+        "dfa" : "un-minimized", "states" : power_transitions
+    }
+
+
+def print_dfa(dfa):
+    print("state\t\t\tinput\t\t\tnext_state\t\t\tstarting\t\t\taccepting")
+    print("DFA")
+    print("Non Minimized")
+    for state in dfa['states']:
+        for i, _input in enumerate(state['input']):
+            print(str(state["state"]) +"\t\t\t\t\t" + str(_input) + '\t\t\t\t\t' +
+                  str(state['next_state'][i]['state']) +"\t\t\t\t\t" + str(state['starting']) +"\t\t\t\t\t" + str(state['accepting']))
+
+
 nfa = parser("a|b", "a|b")
-print(generate_basic_closures(nfa))
+power_closures, x = generate_power_closures(nfa)
+print_dfa(build_dfa(nfa, power_closures))
+
