@@ -241,14 +241,42 @@ def traverse_dfa(dfa, current_state: str, visited: []):
             traverse_dfa(dfa, transition_states['state'], visited)
 
 
+def relabel_dfa(dfa):
+    states = dfa['states']
+    old_states = []
+
+    for i, state in enumerate(states):
+        old_states.append({'new_state': str(i+1), "old_state": state['state']})
+        state['state'] = str(i+1)
+
+    for i, state in enumerate(states):
+        for next_state in state['next_state']:
+            for old_state in old_states:
+                if next_state['state'] == old_state['old_state']:
+                    next_state['state'] = old_state['new_state']
+                    break
+
+    # remove [] states
+    # print("reducing empty transitions...")
+    # for state in dfa['states']:
+    #     for i, _input in enumerate(state['input']):
+    #         if _input == '[]':
+    #             state['input'].pop(i)
+    #             state['next_state'].pop(i)
+    #             break
+
+    return dfa
+
+
 def print_dfa(dfa):
     print("DFA")
     print("Non Minimized")
     print("state\t\t\tinput\t\t\tnext_state\t\t\tstarting\t\t\taccepting")
     for state in dfa['states']:
-        for i, _input in enumerate(state['input']):
-            print(str(state["state"]) +"\t\t\t\t\t" + str(_input) + '\t\t\t\t\t' +
-                  str(state['next_state'][i]['state']) +"\t\t\t\t\t" + str(state['starting']) +"\t\t\t\t\t" + str(state['accepting']))
+        if len(state['input']) != 0:
+            for i, _input in enumerate(state['input']):
+                print(str(state["state"]) +"\t\t\t\t\t" + str(_input) + '\t\t\t\t\t' +
+                      str(state['next_state'][i]['state']) +"\t\t\t\t\t" + str(state['starting']) +"\t\t\t\t\t" + str(state['accepting']))
         else:
             if state['accepting'] or state['starting']:
                 print(str(state["state"]) + "\t\t\t\t\t" + "[]" + '\t\t\t\t\t' +
@@ -256,9 +284,9 @@ def print_dfa(dfa):
                     state['accepting']))
 
 
-nfa = parser("a?b*c", "a?.b*.c")
+nfa = parser("10(0|1)*ab?", "1.0.(0|1)*.a.b?")
 power_closures, x = generate_power_closures(nfa)
 dfa = build_dfa(nfa, power_closures)
 reduce_dfa_states(dfa)
-print_dfa(dfa)
+print_dfa(relabel_dfa(dfa))
 
