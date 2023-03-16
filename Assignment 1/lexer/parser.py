@@ -5,7 +5,7 @@ def precedence(char):
         return 2
     elif char in "|":
         return 1
-    elif char in "1234567890qwertyuioplkjhgfdsazxcvbnm":
+    elif char in "1234567890qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM":
         return 0
 
 
@@ -65,7 +65,7 @@ def joining_order(postfix_expression):
 def validate_regex(expression):
     for i in expression:
         brackets = 0
-        if i not in "qwertyuiopasdfghjklzxcvbnm?*+|.()":
+        if i not in "QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuiopasdfghjklzxcvbnm?*+|.()":
             return False
         if i == '(':
             brackets += 1
@@ -141,7 +141,7 @@ def define_operand_nfa(operand, count):
 def build_intro_nfa_table(expression):
     count = 1
     for c in expression:
-        if c in "qwertyuiopasdfghjklzxcvbnm1234567890":
+        if c in "QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890":
             define_operand_nfa(c, count)
             count += 2
         else:
@@ -319,7 +319,8 @@ def print_state_table(nfa):
             for i in range(0, len(states['next_state'])):
                 print(nfa_block_internal['nfa'] + "\t\t\t\t" + str(states['state']) + "\t\t" + str(
                     states['input'][i]) + "\t\t" + str(states['next_state'][i]) + "\t\t\t\t" + str(
-                    states['starting']) + '\t\t\t\t' + str(states['accepting']) + "\n")
+                    states['starting']) + '\t\t\t\t' + str(states['accepting']))
+    print("\n\n\n")
 
 
 def parser(expression="00(01|10)*11*", validator="0.0.(0.1|1.0)*.1.1*"):

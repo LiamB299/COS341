@@ -27,15 +27,15 @@ def generate_basic_closures(nfa: _nfa_block):
     n_states = len(nfa['states'])
 
     states_closures = []
-    for i in range(1, n_states+1):
+    for i in range(1, n_states + 1):
         current_closure = []
         visit_state(nfa, i, current_closure)
-        states_closures.append({'state':i, 'closure': current_closure})
+        states_closures.append({'state': i, 'closure': current_closure})
 
     return states_closures
 
 
-def visit_state(nfa: _nfa_block, current_state: int, visited : []):
+def visit_state(nfa: _nfa_block, current_state: int, visited: []):
     # this state is visited
     visited.append(current_state)
 
@@ -56,7 +56,7 @@ def visit_state(nfa: _nfa_block, current_state: int, visited : []):
 def generate_power_closures(nfa: _nfa_block):
     # generate closures
     basic_closures = generate_basic_closures(nfa)
-    print(basic_closures)
+    # print(basic_closures)
 
     # generate powerset
     powerset = generate_powerset(nfa)
@@ -66,12 +66,12 @@ def generate_power_closures(nfa: _nfa_block):
     for set in powerset:
         current_closure = []
         for state in set:
-            for closure in basic_closures[state-1]['closure']:
+            for closure in basic_closures[state - 1]['closure']:
                 current_closure.append(closure)
         res = []
         [res.append(x) for x in current_closure if x not in res]
         current_closure = res
-        power_closures.append({"set":set, "label":count, "closure":current_closure})
+        power_closures.append({"set": set, "label": count, "closure": current_closure})
         count += 1
 
     return power_closures, powerset
@@ -119,25 +119,27 @@ def build_dfa(nfa: _nfa_block, power_closures):
                         closure_set = closure['closure']
                         closure_set.sort()
                         _input.append(state_input)
-                        next_state.append({"label":closure["label"], "state": closure_set})
+                        next_state.append({"label": closure["label"], "state": closure_set})
                         break
 
         if len(_input) != 0:
-            _transition_table.append({"state":state["state"], "input": _input, "next_state":next_state})
+            _transition_table.append({"state": state["state"], "input": _input, "next_state": next_state})
 
-    print(_transition_table)
+    # print(_transition_table)
 
     power_transitions = []
     for closure_set in power_closures:
         bigger_trans_set_input = []
-        bigger_trans_set_next_state= []
+        bigger_trans_set_next_state = []
         for new_trans_state in _transition_table:
             if new_trans_state['state'] in closure_set['set']:
                 for i, _input in enumerate(new_trans_state["input"]):
                     bigger_trans_set_input.append(_input)
-                    bigger_trans_set_next_state.append({"label":"", "state": new_trans_state['next_state'][i]['state']})
-        power_transitions.append({"state":closure_set['set'], "input":bigger_trans_set_input, "next_state":bigger_trans_set_next_state, "accepting":False, "starting":False})
-
+                    bigger_trans_set_next_state.append(
+                        {"label": "", "state": new_trans_state['next_state'][i]['state']})
+        power_transitions.append(
+            {"state": closure_set['set'], "input": bigger_trans_set_input, "next_state": bigger_trans_set_next_state,
+             "accepting": False, "starting": False})
 
     # pop_index = []
     # for i, state in enumerate(power_transitions):
@@ -185,10 +187,9 @@ def build_dfa(nfa: _nfa_block, power_closures):
         for next_state in state['next_state']:
             next_state['state'] = str(next_state['state'])
 
-
     # return DFA
     return {
-        "dfa" : "un-minimized", "states" : power_transitions
+        "dfa": "un-minimized", "states": power_transitions
     }
 
 
@@ -202,7 +203,6 @@ def reduce_dfa_states(dfa):
     visited = [starting_state['state']]
     for transition_states in starting_state['next_state']:
         traverse_dfa(dfa, transition_states['state'], visited)
-
 
     # remove untagged states
     print("reducing states...")
@@ -246,8 +246,8 @@ def relabel_dfa(dfa):
     old_states = []
 
     for i, state in enumerate(states):
-        old_states.append({'new_state': str(i+1), "old_state": state['state']})
-        state['state'] = str(i+1)
+        old_states.append({'new_state': str(i + 1), "old_state": state['state']})
+        state['state'] = str(i + 1)
 
     for i, state in enumerate(states):
         for next_state in state['next_state']:
@@ -275,18 +275,13 @@ def print_dfa(dfa):
     for state in dfa['states']:
         if len(state['input']) != 0:
             for i, _input in enumerate(state['input']):
-                print(str(state["state"]) +"\t\t\t\t\t" + str(_input) + '\t\t\t\t\t' +
-                      str(state['next_state'][i]['state']) +"\t\t\t\t\t" + str(state['starting']) +"\t\t\t\t\t" + str(state['accepting']))
+                print(str(state["state"]) + "\t\t\t\t\t" + str(_input) + '\t\t\t\t\t' +
+                      str(state['next_state'][i]['state']) + "\t\t\t\t\t" + str(state['starting']) + "\t\t\t\t\t" + str(
+                    state['accepting']))
         else:
             if state['accepting'] or state['starting']:
                 print(str(state["state"]) + "\t\t\t\t\t" + "[]" + '\t\t\t\t\t' +
                       "[]" + "\t\t\t\t\t" + str(state['starting']) + "\t\t\t\t\t" + str(
                     state['accepting']))
 
-
-nfa = parser("10(0|1)*ab?", "1.0.(0|1)*.a.b?")
-power_closures, x = generate_power_closures(nfa)
-dfa = build_dfa(nfa, power_closures)
-reduce_dfa_states(dfa)
-print_dfa(relabel_dfa(dfa))
-
+    print('\n\n\n')
