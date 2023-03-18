@@ -71,6 +71,7 @@ def generate_power_closures(nfa: _nfa_block):
         res = []
         [res.append(x) for x in current_closure if x not in res]
         current_closure = res
+        current_closure.sort()
         power_closures.append({"set": set, "label": count, "closure": current_closure})
         count += 1
 
@@ -134,6 +135,11 @@ def build_dfa(nfa: _nfa_block, power_closures):
         for new_trans_state in _transition_table:
             if new_trans_state['state'] in closure_set['set']:
                 for i, _input in enumerate(new_trans_state["input"]):
+                    ####################################
+                    # temporary solution, if input already in set do not add again
+                    if _input in bigger_trans_set_input:
+                        continue
+                    ####################################
                     bigger_trans_set_input.append(_input)
                     bigger_trans_set_next_state.append(
                         {"label": "", "state": new_trans_state['next_state'][i]['state']})

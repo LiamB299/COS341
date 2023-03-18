@@ -1,6 +1,7 @@
 from parser import *
 from lexer import *
 from minimizer import *
+from gen_output import output_to_xml
 
 
 def gen_final_dfa(expression="10(0|1)*ab?", comp_expression="1.0.(0|1)*.a.b?"):
@@ -12,10 +13,28 @@ def gen_final_dfa(expression="10(0|1)*ab?", comp_expression="1.0.(0|1)*.a.b?"):
     print_dfa(dfa)
     DFA = minimize(dfa)
     print_dfa(DFA)
+    # output_to_xml(dfa)
+
 
 
 # gen_final_dfa("EEE", "E.E.E")
 # gen_final_dfa("a?b?c?", "a?.b?.c?")
 # gen_final_dfa("(a+)*", "(a+)*")
 # gen_final_dfa("(a*)+", "(a*)+")
-gen_final_dfa("ab*(1|e)+e?", "a.b*.(1|e)+.e?")
+
+# bug in merging -> virtually same state merging issue
+# gen_final_dfa("(1|e)e?", "(1|e).e?")
+
+# gen_final_dfa("a|(1|e)*e?", "a|(1|e)*.e?")
+
+#####################################
+# gen_final_dfa('a', 'a')
+# gen_final_dfa('a*', 'a*')
+# gen_final_dfa('a+', 'a+')
+# gen_final_dfa('aa', 'a.a')
+# gen_final_dfa('a|b', 'a|b')
+# gen_final_dfa('a|b|c', 'a|b|c')
+# gen_final_dfa('a?', 'a?')
+# gen_final_dfa('a?', 'a?')
+gen_final_dfa('a|(b?)', 'a|(b?)')
+
