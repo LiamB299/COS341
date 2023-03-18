@@ -2,7 +2,7 @@ from dict2xml import dict2xml
 
 
 def format_output(dfa):
-    output = {"dfa":dfa['dfa'], 'list_states':[]}
+    output = {"dfa":dfa['dfa'], 'state_infos':[]}
     new_states = []
     for i, state in enumerate(dfa['states']):
         new_states.append({"state":state['state'], 'transitions':[], 'accepting':state['accepting'], 'starting':state['starting']})
@@ -10,7 +10,7 @@ def format_output(dfa):
         for j, _input in enumerate(state['input']):
             items.append({'input':state['input'][j], 'next_state':state['next_state'][j]['state']})
         new_states[i]['transitions'].append(items)
-    output['list_states'] = new_states
+    output['state_infos'] = new_states
     return output
 
 

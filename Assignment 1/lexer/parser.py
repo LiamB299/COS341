@@ -323,14 +323,15 @@ def print_state_table(nfa):
     print("\n\n\n")
 
 
-def parser(expression="00(01|10)*11*", validator="0.0.(0.1|1.0)*.1.1*"):
+def parser(expression="00(01|10)*11*", validator="0.0.(0.1|1.0)*.1.1*", debug=True):
     # add dots for concatenation
     expression = add_dot(expression)
-    if expression != validator:
+    if expression != validator and debug:
         print("ERROR################################")
         return 0
 
     # convert to postfix
+    print("Convert from Infix to Postfix:")
     print("expression\t" + expression)
     postfix = infix_to_postfix(expression)
     print("postfix\t" + postfix)
@@ -353,32 +354,32 @@ def parser(expression="00(01|10)*11*", validator="0.0.(0.1|1.0)*.1.1*"):
         i += 1
         symbol = stack[i]
         if symbol['nfa'] == "*":
-            print("star")
+            # print("star")
             new_block, count = kleen_star(stack[i - 1], count)
             stack.pop(i - 1)
             stack[i - 1] = new_block
             i = 0
         elif symbol['nfa'] == "?":
-            print("question_mark")
+            # print("question_mark")
             new_block = question_mark(stack[i - 1])
             stack.pop(i - 1)
             stack[i - 1] = new_block
             i = 0
         elif symbol['nfa'] == "+":
-            print("plus")
+            # print("plus")
             new_block, count = plus(stack[i - 1], count)
             stack.pop(i - 1)
             stack[i - 1] = new_block
             i = 0
         elif symbol['nfa'] == ".":
-            print("concat")
+            # print("concat")
             new_block = concatenate(stack[i - 2], stack[i - 1])
             stack.pop(i - 1)
             stack.pop(i - 1)
             stack[i - 2] = new_block
             i = 0
         elif symbol['nfa'] == "|":
-            print("or")
+            # print("or")
             new_block, count = orr(stack[i - 2], stack[i - 1], count)
             stack.pop(i - 1)
             stack.pop(i - 1)
@@ -389,6 +390,7 @@ def parser(expression="00(01|10)*11*", validator="0.0.(0.1|1.0)*.1.1*"):
     remove_no_move_state(stack[0])
 
     # print final NFA
+    print("NFA:")
     print_state_table(stack)
 
     return stack[0]

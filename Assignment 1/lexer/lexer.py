@@ -280,7 +280,7 @@ def relabel_dfa(dfa):
 
 def print_dfa(dfa):
     print("DFA")
-    print("Non Minimized")
+    print(dfa['dfa'])
     print("state\t\t\tinput\t\t\tnext_state\t\t\tstarting\t\t\taccepting")
     for state in dfa['states']:
         if len(state['input']) != 0:
