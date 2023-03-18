@@ -1,6 +1,6 @@
 def validate_expression(expression: str):
     if expression == '':
-        return True
+        return True, 'EMPTY_STRING'
 
     expr = expression.replace(" ", "")
 

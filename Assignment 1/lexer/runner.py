@@ -5,6 +5,7 @@ from minimizer import *
 from gen_output import *
 
 
+# build with: python -m PyInstaller runner.py
 def entry_point():
     try:
         expression = input("please enter regex:\n")
@@ -43,5 +44,3 @@ def entry_point():
 
 if __name__ == '__main__':
     entry_point()
-
-# build with: python -m PyInstaller runner.py

@@ -314,7 +314,7 @@ def print_state_table(nfa):
             continue
         count += 1
         print("\n\nblock:\t" + str(count))
-        print("nfa\t\t\t\tstate\tinput\tnext_state\t\tstarting_state\t\taccepting_state")
+        print("nfa\t\t\t\t\t\tstate\tinput\t\t\t\tnext_state\t\t\t\tstarting_state\t\t\t\taccepting_state")
         for states in nfa_block_internal['states']:
             for i in range(0, len(states['next_state'])):
                 print(nfa_block_internal['nfa'] + "\t\t\t\t" + str(states['state']) + "\t\t" + str(
@@ -324,6 +324,20 @@ def print_state_table(nfa):
 
 
 def parser(expression="00(01|10)*11*", validator="0.0.(0.1|1.0)*.1.1*", debug=True):
+    if expression == "":
+        return {
+            'nfa': "",
+            'type': "EMPTY_STRING",
+            'states': [
+                {
+                    'state': 1,
+                    'input': ['#'],
+                    'next_state': [-1],
+                    'accepting': True,
+                    'starting': True
+                }
+            ]}
+
     # add dots for concatenation
     expression = add_dot(expression)
     if expression != validator and debug:
