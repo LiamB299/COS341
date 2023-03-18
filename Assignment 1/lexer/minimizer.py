@@ -31,7 +31,11 @@ def find_duplicates(states):
                 continue
 
             # check input is defined
-            found = False
+            # May cause breakage -> this is for fail states, and merging no moving accepting
+            if len(state['input']) == len(other_state['input']) and len(state['input']) == 0:
+                found = True
+            else:
+                found = False
             for _input in state['input']:
                 found = False
                 for compare_input in other_state['input']:

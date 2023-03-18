@@ -96,6 +96,17 @@ def is_accepting_starting(nfa: _nfa_block, states: []):
     return accepting, starting
 
 
+# reduce the power set to only important entries
+def reduce_power_set(transition_table:[], power_set: []):
+    reduced_set = []
+    for i, set in enumerate(power_set):
+        for defined_state in transition_table:
+            if defined_state['state'] in set['set'] or len(set['set']) == 1:
+                reduced_set.append(power_set[i])
+                break
+    return reduced_set
+
+
 def build_dfa(nfa: _nfa_block, power_closures):
     # dfa
     _transition_table = []
@@ -128,6 +139,9 @@ def build_dfa(nfa: _nfa_block, power_closures):
 
     # print(_transition_table)
 
+    # power_closures = reduce_power_set(_transition_table, power_closures)
+
+    # build new transition table
     power_transitions = []
     for closure_set in power_closures:
         bigger_trans_set_input = []
@@ -136,24 +150,23 @@ def build_dfa(nfa: _nfa_block, power_closures):
             if new_trans_state['state'] in closure_set['set']:
                 for i, _input in enumerate(new_trans_state["input"]):
                     ####################################
-                    # temporary solution, if input already in set do not add again
+                    # if an input is defined the transition sets must be merged
                     if _input in bigger_trans_set_input:
-                        continue
+                        index = bigger_trans_set_input.index(_input)
+                        prev_to_add = bigger_trans_set_next_state[index]['state']
+                        to_merge = new_trans_state['next_state'][i]['state']
+                        merged = prev_to_add + to_merge
+                        merged = list(dict.fromkeys(merged))
+                        merged.sort()
+                        bigger_trans_set_next_state[index]['state'] = merged
                     ####################################
-                    bigger_trans_set_input.append(_input)
-                    bigger_trans_set_next_state.append(
+                    else:
+                        bigger_trans_set_input.append(_input)
+                        bigger_trans_set_next_state.append(
                         {"label": "", "state": new_trans_state['next_state'][i]['state']})
         power_transitions.append(
             {"state": closure_set['set'], "input": bigger_trans_set_input, "next_state": bigger_trans_set_next_state,
              "accepting": False, "starting": False})
-
-    # pop_index = []
-    # for i, state in enumerate(power_transitions):
-    #     if len(state['input']) == 0:
-    #         pop_index.append(i)
-    #
-    # for i in range(len(pop_index)-1, 0, -1):
-    #     power_transitions.pop(pop_index[i])
 
     for old_state in nfa['states']:
         if old_state['starting']:
@@ -261,15 +274,6 @@ def relabel_dfa(dfa):
                 if next_state['state'] == old_state['old_state']:
                     next_state['state'] = old_state['new_state']
                     break
-
-    # remove [] states
-    # print("reducing empty transitions...")
-    # for state in dfa['states']:
-    #     for i, _input in enumerate(state['input']):
-    #         if _input == '[]':
-    #             state['input'].pop(i)
-    #             state['next_state'].pop(i)
-    #             break
 
     return dfa
 

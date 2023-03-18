@@ -28,7 +28,7 @@ def gen_final_dfa(expression="10(0|1)*ab?", comp_expression="1.0.(0|1)*.a.b?"):
 # gen_final_dfa("a|(1|e)*e?", "a|(1|e)*.e?")
 
 #####################################
-# gen_final_dfa('a', 'a')
+gen_final_dfa('a', 'a')
 # gen_final_dfa('a*', 'a*')
 # gen_final_dfa('a+', 'a+')
 # gen_final_dfa('aa', 'a.a')
@@ -36,5 +36,17 @@ def gen_final_dfa(expression="10(0|1)*ab?", comp_expression="1.0.(0|1)*.a.b?"):
 # gen_final_dfa('a|b|c', 'a|b|c')
 # gen_final_dfa('a?', 'a?')
 # gen_final_dfa('a?', 'a?')
-gen_final_dfa('a|(b?)', 'a|(b?)')
+# gen_final_dfa('a|(b?)', 'a|(b?)')
+# gen_final_dfa('a|(b)*', 'a|(b)*')
+# gen_final_dfa('a|(b*)', 'a|(b*)')
+# gen_final_dfa('(a|(b))*', '(a|(b))*')
+# gen_final_dfa('(a?|(b?))', '(a?|(b?))')
+# gen_final_dfa('(a?(b?))', '(a?.(b?))')
+# gen_final_dfa('(a?(b?)cd)', '(a?.(b?).c.d)')
+# gen_final_dfa('(a?(b?)c*d*)', '(a?.(b?).c*.d*)')
+# gen_final_dfa('(a+(b?)c*d*)', '(a+.(b?).c*.d*)')
+# gen_final_dfa('a(a+(b?)c*d*)', 'a.(a+.(b?).c*.d*)')
+
+# -> bug in mergin states.. fixed?
+# gen_final_dfa('a|(a+)', 'a|(a+)')
 
