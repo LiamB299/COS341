@@ -1,4 +1,5 @@
 from parser import parser, _nfa_block
+from itertools import chain, combinations
 
 
 def generate_powerset(nfa: _nfa_block):
@@ -14,10 +15,14 @@ def generate_powerset(nfa: _nfa_block):
 
     # generate powerset
     # credit: https://stackoverflow.com/questions/1482308/how-to-get-all-subsets-of-a-set-powerset
-    powerset = []
-    x = len(normal_set)
-    for i in range(1 << x):
-        powerset.append([normal_set[j] for j in range(x) if (i & (1 << j))])
+    # powerset = []
+    # x = len(normal_set)
+    # for i in range(1 << x):
+    #     powerset.append([normal_set[j] for j in range(x) if (i & (1 << j))])
+
+    s = list(normal_set)
+    items = list(chain.from_iterable(combinations(s, r) for r in range(len(s) + 1)))
+    powerset = [list(i) for i in items if True]
 
     return powerset
 
@@ -62,18 +67,29 @@ def generate_power_closures(nfa: _nfa_block):
     powerset = generate_powerset(nfa)
 
     power_closures = []
-    count = 1
-    for set in powerset:
-        current_closure = []
-        for state in set:
-            for closure in basic_closures[state - 1]['closure']:
-                current_closure.append(closure)
-        res = []
-        [res.append(x) for x in current_closure if x not in res]
-        current_closure = res
-        current_closure.sort()
-        power_closures.append({"set": set, "label": count, "closure": current_closure})
-        count += 1
+    # count = 1
+    # for set in powerset:
+    #     current_closure = []
+    #     for state in set:
+    #         for closure in basic_closures[state - 1]['closure']:
+    #             current_closure.append(closure)
+    #     res = []
+    #     [res.append(x) for x in current_closure if x not in res]
+    #     current_closure = res
+    #     current_closure.sort()
+    #     power_closures.append({"set": set, "label": count, "closure": current_closure})
+    #     count += 1
+
+    # Create a dictionary mapping each state to its closures
+    closure_map = {}
+    for i, closure in enumerate(basic_closures):
+        closure_map[i + 1] = closure['closure']
+
+    # Iterate over the powerset and compute closures
+    power_closures = []
+    for i, subset in enumerate(powerset):
+        current_closure = set().union(*(closure_map[state] for state in subset))
+        power_closures.append({"set": subset, "label": i, "closure": sorted(current_closure)})
 
     return power_closures, powerset
 
