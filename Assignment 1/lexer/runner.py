@@ -21,10 +21,13 @@ def entry_point():
 
         print("Convert to DFA...")
         print("Powerset of closures...")
+        print("This may take O(n^3) long...")
         power_closures, x = generate_power_closures(nfa)
         dfa = build_dfa(nfa, power_closures)
+
         print("Remove unreachable states for readability")
         reduce_dfa_states(dfa)
+
         print('Relabel states\n')
         dfa = relabel_dfa(dfa)
         print_dfa(dfa)

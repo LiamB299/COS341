@@ -29,7 +29,6 @@ def gen_final_dfa(expression="10(0|1)*ab?", comp_expr=""):
     print_dfa(DFA)
 
 
-
 # gen_final_dfa("EEE", "E.E.E")
 # gen_final_dfa("a?b?c?", "a?.b?.c?")
 # gen_final_dfa("(a+)*", "(a+)*")
@@ -67,3 +66,13 @@ def gen_final_dfa(expression="10(0|1)*ab?", comp_expr=""):
 # -> bug in mergin states.. fixed?
 # gen_final_dfa('a|(a+)')
 # gen_final_dfa('a|a+')
+# gen_final_dfa('a?b*c|d+')
+# gen_final_dfa('(a?b*c)*|d+|e')
+# gen_final_dfa('a*|b*|b*')
+# gen_final_dfa('(a|b)*abb(a|b)*')
+# gen_final_dfa('(a*|b*)*')
+# gen_final_dfa('qwertyuio')
+# gen_final_dfa('q*wertyuio')
+# gen_final_dfa('q*w?(e|r)tyuio')
+# gen_final_dfa('q*w?(e|r)tyuio+')
+gen_final_dfa('ab*c?|ab*ca?b+')
