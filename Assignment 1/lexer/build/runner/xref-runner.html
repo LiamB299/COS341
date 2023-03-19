@@ -43,6 +43,7 @@ imports:
  &#8226;   <a href="#collections">collections</a>
  &#8226;   <a href="#collections.abc">collections.abc</a>
  &#8226;   <a href="#copyreg">copyreg</a>
+ &#8226;   <a href="#dfa_gen">dfa_gen</a>
  &#8226;   <a href="#encodings">encodings</a>
  &#8226;   <a href="#encodings.aliases">encodings.aliases</a>
  &#8226;   <a href="#encodings.ascii">encodings.ascii</a>
@@ -173,7 +174,6 @@ imports:
  &#8226;   <a href="#heapq">heapq</a>
  &#8226;   <a href="#io">io</a>
  &#8226;   <a href="#keyword">keyword</a>
- &#8226;   <a href="#lexer">lexer</a>
  &#8226;   <a href="#linecache">linecache</a>
  &#8226;   <a href="#locale">locale</a>
  &#8226;   <a href="#minimizer">minimizer</a>
@@ -1640,6 +1640,24 @@ imports:
 imported by:
     <a href="#fractions">fractions</a>
  &#8226;   <a href="#statistics">statistics</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="dfa_gen"></a>
+  <a target="code" href="///C:/Users/liamb/Documents/Documents/University/Final%20Year/COS341/Assignments/GIT/COS341/Assignment%201/lexer/dfa_gen.py" type="text/plain"><tt>dfa_gen</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#itertools">itertools</a>
+ &#8226;   <a href="#parser">parser</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#minimizer">minimizer</a>
+ &#8226;   <a href="#runner.py">runner.py</a>
 
   </div>
 
@@ -5153,6 +5171,7 @@ imports:
  &#8226;   <a href="#importlib">importlib</a>
  &#8226;   <a href="#importlib._bootstrap">importlib._bootstrap</a>
  &#8226;   <a href="#importlib._bootstrap_external">importlib._bootstrap_external</a>
+ &#8226;   <a href="#importlib.machinery">importlib.machinery</a>
  &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#warnings">warnings</a>
 
@@ -5283,7 +5302,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#importlib.abc">importlib.abc</a>
+    <a href="#importlib">importlib</a>
+ &#8226;   <a href="#importlib.abc">importlib.abc</a>
  &#8226;   <a href="#inspect">inspect</a>
  &#8226;   <a href="#py_compile">py_compile</a>
 
@@ -5744,11 +5764,11 @@ imported by:
  &#8226;   <a href="#calendar">calendar</a>
  &#8226;   <a href="#collections">collections</a>
  &#8226;   <a href="#dataclasses">dataclasses</a>
+ &#8226;   <a href="#dfa_gen">dfa_gen</a>
  &#8226;   <a href="#importlib.metadata">importlib.metadata</a>
  &#8226;   <a href="#importlib.metadata._itertools">importlib.metadata._itertools</a>
  &#8226;   <a href="#importlib.resources._itertools">importlib.resources._itertools</a>
  &#8226;   <a href="#inspect">inspect</a>
- &#8226;   <a href="#lexer">lexer</a>
  &#8226;   <a href="#pickle">pickle</a>
  &#8226;   <a href="#random">random</a>
  &#8226;   <a href="#reprlib">reprlib</a>
@@ -5771,24 +5791,6 @@ imported by:
     <a href="#collections">collections</a>
  &#8226;   <a href="#dataclasses">dataclasses</a>
  &#8226;   <a href="#inspect">inspect</a>
- &#8226;   <a href="#runner.py">runner.py</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="lexer"></a>
-  <a target="code" href="///C:/Users/liamb/Documents/Documents/University/Final%20Year/COS341/Assignments/GIT/COS341/Assignment%201/lexer/lexer.py" type="text/plain"><tt>lexer</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#itertools">itertools</a>
- &#8226;   <a href="#parser">parser</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#minimizer">minimizer</a>
  &#8226;   <a href="#runner.py">runner.py</a>
 
   </div>
@@ -5952,7 +5954,7 @@ imported by:
   <a target="code" href="///C:/Users/liamb/Documents/Documents/University/Final%20Year/COS341/Assignments/GIT/COS341/Assignment%201/lexer/minimizer.py" type="text/plain"><tt>minimizer</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#lexer">lexer</a>
+    <a href="#dfa_gen">dfa_gen</a>
 
   </div>
   <div class="import">
@@ -6219,7 +6221,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#lexer">lexer</a>
+    <a href="#dfa_gen">dfa_gen</a>
  &#8226;   <a href="#runner.py">runner.py</a>
 
   </div>

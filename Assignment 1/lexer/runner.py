@@ -14,7 +14,9 @@ def entry_point():
         valid, reduced = regex_validation.validate_expression(expression)
         print('Expression valid? ' + str(valid) + '\nReduced expression to: ' + reduced + '\n\n')
         if not valid:
-            print("Closing")
+            print("Stopped... Please Restart")
+            output_to_xml({"dfa": "dfa", "states": []})
+            input("")
             return
         print("Parsing to NFA...")
         nfa = parser(expression, "", debug=False)

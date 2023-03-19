@@ -157,8 +157,10 @@
   ('dis', 'C:\\Python311\\Lib\\dis.py', 'PYMODULE'),
   ('opcode', 'C:\\Python311\\Lib\\opcode.py', 'PYMODULE'),
   ('ast', 'C:\\Python311\\Lib\\ast.py', 'PYMODULE'),
+  ('subprocess', 'C:\\Python311\\Lib\\subprocess.py', 'PYMODULE'),
+  ('signal', 'C:\\Python311\\Lib\\signal.py', 'PYMODULE'),
   ('stringprep', 'C:\\Python311\\Lib\\stringprep.py', 'PYMODULE'),
-  ('tracemalloc', 'C:\\Python311\\Lib\\tracemalloc.py', 'PYMODULE'),
+  ('_py_abc', 'C:\\Python311\\Lib\\_py_abc.py', 'PYMODULE'),
   ('getpass', 'C:\\Python311\\Lib\\getpass.py', 'PYMODULE'),
   ('nturl2path', 'C:\\Python311\\Lib\\nturl2path.py', 'PYMODULE'),
   ('ftplib', 'C:\\Python311\\Lib\\ftplib.py', 'PYMODULE'),
@@ -169,9 +171,7 @@
   ('http', 'C:\\Python311\\Lib\\http\\__init__.py', 'PYMODULE'),
   ('ssl', 'C:\\Python311\\Lib\\ssl.py', 'PYMODULE'),
   ('http.client', 'C:\\Python311\\Lib\\http\\client.py', 'PYMODULE'),
-  ('_py_abc', 'C:\\Python311\\Lib\\_py_abc.py', 'PYMODULE'),
-  ('subprocess', 'C:\\Python311\\Lib\\subprocess.py', 'PYMODULE'),
-  ('signal', 'C:\\Python311\\Lib\\signal.py', 'PYMODULE'),
+  ('tracemalloc', 'C:\\Python311\\Lib\\tracemalloc.py', 'PYMODULE'),
   ('gen_output',
    'C:\\Users\\liamb\\Documents\\Documents\\University\\Final '
    'Year\\COS341\\Assignments\\GIT\\COS341\\Assignment 1\\lexer\\gen_output.py',
@@ -189,9 +189,9 @@
    'C:\\Users\\liamb\\Documents\\Documents\\University\\Final '
    'Year\\COS341\\Assignments\\GIT\\COS341\\Assignment 1\\lexer\\minimizer.py',
    'PYMODULE'),
-  ('lexer',
+  ('dfa_gen',
    'C:\\Users\\liamb\\Documents\\Documents\\University\\Final '
-   'Year\\COS341\\Assignments\\GIT\\COS341\\Assignment 1\\lexer\\lexer.py',
+   'Year\\COS341\\Assignments\\GIT\\COS341\\Assignment 1\\lexer\\dfa_gen.py',
    'PYMODULE'),
   ('parser',
    'C:\\Users\\liamb\\Documents\\Documents\\University\\Final '

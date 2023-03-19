@@ -20,6 +20,10 @@
   ('dataclasses', 'C:\\Python311\\Lib\\dataclasses.py', 'PYMODULE'),
   ('datetime', 'C:\\Python311\\Lib\\datetime.py', 'PYMODULE'),
   ('decimal', 'C:\\Python311\\Lib\\decimal.py', 'PYMODULE'),
+  ('dfa_gen',
+   'C:\\Users\\liamb\\Documents\\Documents\\University\\Final '
+   'Year\\COS341\\Assignments\\GIT\\COS341\\Assignment 1\\lexer\\dfa_gen.py',
+   'PYMODULE'),
   ('dict2xml',
    'C:\\Python311\\Lib\\site-packages\\dict2xml\\__init__.py',
    'PYMODULE'),
@@ -133,10 +137,6 @@
    'PYMODULE'),
   ('importlib.util', 'C:\\Python311\\Lib\\importlib\\util.py', 'PYMODULE'),
   ('inspect', 'C:\\Python311\\Lib\\inspect.py', 'PYMODULE'),
-  ('lexer',
-   'C:\\Users\\liamb\\Documents\\Documents\\University\\Final '
-   'Year\\COS341\\Assignments\\GIT\\COS341\\Assignment 1\\lexer\\lexer.py',
-   'PYMODULE'),
   ('logging', 'C:\\Python311\\Lib\\logging\\__init__.py', 'PYMODULE'),
   ('lzma', 'C:\\Python311\\Lib\\lzma.py', 'PYMODULE'),
   ('mimetypes', 'C:\\Python311\\Lib\\mimetypes.py', 'PYMODULE'),
