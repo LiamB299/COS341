@@ -1,4 +1,4 @@
-from lexer import print_dfa, parser, generate_power_closures, build_dfa, relabel_dfa, reduce_dfa_states
+from dfa_gen import print_dfa, parser, generate_power_closures, build_dfa, relabel_dfa, reduce_dfa_states
 
 
 # O(n^4)

@@ -1,6 +1,6 @@
 import regex_validation
 from parser import *
-from lexer import *
+from dfa_gen import *
 from minimizer import *
 from gen_output import *
 

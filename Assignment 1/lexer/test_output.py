@@ -1,5 +1,5 @@
 from parser import *
-from lexer import *
+from dfa_gen import *
 from minimizer import *
 from gen_output import output_to_xml
 from regex_validation import *
@@ -75,4 +75,4 @@ def gen_final_dfa(expression="10(0|1)*ab?", comp_expr=""):
 # gen_final_dfa('q*wertyuio')
 # gen_final_dfa('q*w?(e|r)tyuio')
 # gen_final_dfa('q*w?(e|r)tyuio+')
-gen_final_dfa('ab*c?|ab*ca?b+')
+# gen_final_dfa('ab*c?|ab*ca?b+')
