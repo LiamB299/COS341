@@ -2,12 +2,13 @@ import re
 from definitions2 import non_terminals, terminals, rules
 from classes import NfaState, NfaBlock
 import uuid
-from nfa_to_dfa import df_search
+from nfa_to_dfa import df_search, generate_basic_closures, generate_transition_table
 
 
 def generate_label_name(prefix):
-    unique_id = str(uuid.uuid4()).replace('-', '')  # Generate a random UUID and remove the dashes
-    return f"{prefix}_{unique_id}"
+    return prefix
+    # unique_id = str(uuid.uuid4()).replace('-', '')  # Generate a random UUID and remove the dashes
+    # return f"{prefix}_{unique_id}"
 
 
 def split_string(string, word_list):
@@ -32,23 +33,22 @@ def parse_rule(rule: str, block_number: int):
 
     # generate base NFA blocks
     if products[0] == 'ε':
-        final_state = NfaState("##", generate_label_name(block_number), False)
+        final_state = NfaState("##", generate_label_name("S"+str(block_number)+"1"), False)
         final_state.finishing = True
         nfa_block.append_symbol(final_state)
 
     elif prod_symbol == 'C':
-        state = NfaState("<ASCII>", generate_label_name(block_number), False)
+        state = NfaState("<ASCII>", generate_label_name("S"+str(block_number)+"1"), False)
         nfa_block.append_symbol(state)
-        final_state = NfaState("##", generate_label_name(block_number), False)
+        final_state = NfaState("##", generate_label_name("S"+str(block_number)+"2"), False)
         final_state.finishing = True
         nfa_block.append_symbol(final_state)
-        return nfa_block
 
     else:
-        for product in products:
-            state = NfaState(product, generate_label_name(block_number), product not in non_terminals)
+        for i, product in enumerate(products):
+            state = NfaState(product, generate_label_name("S"+str(block_number)+str(i)), product not in non_terminals)
             nfa_block.append_symbol(state)
-        final_state = NfaState("##", generate_label_name(block_number), False)
+        final_state = NfaState("##", generate_label_name("S"+str(block_number)+str(i)), False)
         final_state.finishing = True
         nfa_block.append_symbol(final_state)
 
@@ -84,3 +84,6 @@ for block in rule_blocks:
 visited = []
 df_search(rule_blocks[4].start_symbol.next, visited)
 print(visited)
+
+trans_table = generate_transition_table(rule_blocks)
+generate_basic_closures(trans_table)

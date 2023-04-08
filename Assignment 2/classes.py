@@ -2,17 +2,14 @@ from tabulate import tabulate
 
 
 class NfaState:
-    symbol_transition = ""
-    state_label = ""
     terminal_transition = False
     finishing = False
     start = False
     finishing_number = -1
     next = 0
     prev = 0
-    epsilon_transitions = []
 
-    def __init__(self, symbol, label, terminal):
+    def __init__(self, symbol, label="", terminal=False):
         self.symbol_transition = symbol
         self.state_label = label
         self.terminal_transition = terminal
@@ -91,3 +88,36 @@ class NfaBlock:
         print("Epsilons")
         print(table2)
         print('\n')
+
+
+class Transition:
+    def __init__(self, _input, next):
+        self.transition_input = _input
+        self.to_state = next
+
+
+class DfaState:
+    containing_labels = []
+    finishing = False
+    starting = False
+    transitions = []
+    prev = []
+
+    def __init__(self):
+        self.transitions = []
+        self.containing_labels = []
+
+
+class DFA:
+    start = 0
+
+    def __init__(self):
+        self.states = {}
+
+    def add_state(self, state):
+        self.states[state.state_label] = state
+
+    def add_transitions(self, state, transition_list: [Transition]):
+        self.states[state].transitions = transition_list
+        for transition in transition_list:
+            transition.to_state.prev.append(self)
