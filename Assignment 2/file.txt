@@ -1,0 +1,37 @@
+| Label   | containing states                                               | Start   | Finishing   | Transition Input   | Next   |
+|:--------|:----------------------------------------------------------------|:--------|:------------|:-------------------|:-------|
+| D1      | ['S00', 'S10', 'S20', 'S30', 'S40', 'S50', 'S60', 'S70', 'S80'] | True    | False       | n                  | D6     |
+| D1      | ['S00', 'S10', 'S20', 'S30', 'S40', 'S50', 'S60', 'S70', 'S80'] | True    | False       | EXP                | D13    |
+| D1      | ['S00', 'S10', 'S20', 'S30', 'S40', 'S50', 'S60', 'S70', 'S80'] | True    | False       | TWO                | D10    |
+| D1      | ['S00', 'S10', 'S20', 'S30', 'S40', 'S50', 'S60', 'S70', 'S80'] | True    | False       | (                  | D3     |
+| D1      | ['S00', 'S10', 'S20', 'S30', 'S40', 'S50', 'S60', 'S70', 'S80'] | True    | False       | THREE              | D2     |
+| D2      | {'S61'}                                                         | False   | True        |                    |        |
+| D3      | {'S70', 'S20', 'S50', 'S30', 'S80', 'S40', 'S10', 'S60', 'S81'} | False   | False       | n                  | D6     |
+| D3      | {'S70', 'S20', 'S50', 'S30', 'S80', 'S40', 'S10', 'S60', 'S81'} | False   | False       | EXP                | D8     |
+| D3      | {'S70', 'S20', 'S50', 'S30', 'S80', 'S40', 'S10', 'S60', 'S81'} | False   | False       | TWO                | D4     |
+| D3      | {'S70', 'S20', 'S50', 'S30', 'S80', 'S40', 'S10', 'S60', 'S81'} | False   | False       | (                  | D3     |
+| D3      | {'S70', 'S20', 'S50', 'S30', 'S80', 'S40', 'S10', 'S60', 'S81'} | False   | False       | THREE              | D2     |
+| D4      | {'S51'}                                                         | False   | False       | /                  | D5     |
+| D5      | {'S52', 'S70', 'S80'}                                           | False   | False       | THREE              | D7     |
+| D5      | {'S52', 'S70', 'S80'}                                           | False   | False       | n                  | D6     |
+| D5      | {'S52', 'S70', 'S80'}                                           | False   | False       | (                  | D3     |
+| D6      | {'S71'}                                                         | False   | True        |                    |        |
+| D7      | {'S53'}                                                         | False   | True        |                    |        |
+| D8      | {'S21'}                                                         | False   | False       | -                  | D9     |
+| D9      | {'S70', 'S50', 'S80', 'S40', 'S22', 'S60'}                      | False   | False       | n                  | D6     |
+| D9      | {'S70', 'S50', 'S80', 'S40', 'S22', 'S60'}                      | False   | False       | TWO                | D4     |
+| D9      | {'S70', 'S50', 'S80', 'S40', 'S22', 'S60'}                      | False   | False       | (                  | D3     |
+| D9      | {'S70', 'S50', 'S80', 'S40', 'S22', 'S60'}                      | False   | False       | THREE              | D2     |
+| D10     | {'S51', 'S41', 'S31'}                                           | False   | True        | /                  | D5     |
+| D10     | {'S51', 'S41', 'S31'}                                           | False   | True        | *                  | D11    |
+| D11     | {'S42', 'S80', 'S70'}                                           | False   | False       | THREE              | D12    |
+| D11     | {'S42', 'S80', 'S70'}                                           | False   | False       | (                  | D3     |
+| D11     | {'S42', 'S80', 'S70'}                                           | False   | False       | n                  | D6     |
+| D12     | {'S43'}                                                         | False   | True        |                    |        |
+| D13     | {'S11', 'S01', 'S21'}                                           | False   | True        | +                  | D14    |
+| D13     | {'S11', 'S01', 'S21'}                                           | False   | True        | -                  | D9     |
+| D14     | {'S70', 'S12', 'S50', 'S80', 'S40', 'S60'}                      | False   | False       | n                  | D6     |
+| D14     | {'S70', 'S12', 'S50', 'S80', 'S40', 'S60'}                      | False   | False       | TWO                | D15    |
+| D14     | {'S70', 'S12', 'S50', 'S80', 'S40', 'S60'}                      | False   | False       | (                  | D3     |
+| D14     | {'S70', 'S12', 'S50', 'S80', 'S40', 'S60'}                      | False   | False       | THREE              | D2     |
+| D15     | {'S13'}                                                         | False   | True        |                    |        |

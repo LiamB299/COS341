@@ -1,5 +1,5 @@
 import re
-from definitions2 import non_terminals, terminals, rules
+from definitions3 import non_terminals, terminals, rules
 from classes import *
 import uuid
 from nfa_to_dfa import *
@@ -24,7 +24,7 @@ def split_string(string, word_list):
 
 def parse_rule(rule: str, block_number: int):
     prod_symbol, production = rule.replace(" ", "").split("::=")
-    products = split_string(production, non_terminals + terminals)
+    products = split_string(production, non_terminals)
     nfa_block = NfaBlock()
     nfa_block.expression = rule
 
@@ -140,7 +140,7 @@ def link_dfa(dfa, closure_transitions):
 # def add_state(state_number:int, containing_labels:list(str), )
 
 
-def build_dfa(nfa: [NfaBlock], closures, transition_table, closure_transitions):
+def build_dfa(nfa: [NfaBlock], closures, transition_table, closure_transitions, finishing_states):
     dfa_transitions = {}
     unstr_states = []
     # state_count = 1
@@ -163,7 +163,7 @@ def build_dfa(nfa: [NfaBlock], closures, transition_table, closure_transitions):
         if closure_transition['input'] == '##':
             continue
         if closure_transition['input'] in transitions:
-            transitions[closure_transition['input']].add(closure_transition['to_state'])
+            transitions[closure_transition['input']] = transitions[closure_transition['input']].union(closure_transition['to_state'])
         else:
             transitions[closure_transition['input']] = closure_transition['to_state']
 
@@ -196,7 +196,7 @@ def build_dfa(nfa: [NfaBlock], closures, transition_table, closure_transitions):
             if closure_transition['input'] == '##':
                 continue
             if closure_transition['input'] in transitions:
-                transitions[closure_transition['input']].add(closure_transition['to_state'])
+                transitions[closure_transition['input']].union(closure_transition['to_state'])
             else:
                 transitions[closure_transition['input']] = closure_transition['to_state']
 
@@ -212,16 +212,16 @@ def build_dfa(nfa: [NfaBlock], closures, transition_table, closure_transitions):
     dfa_states = []
     for state in unstr_states:
         dfa_states.append(DfaState())
-        dfa_states[count-1].state_label = 'D'+str(count)
-        dfa_states[count-1].containing_labels = state
+        dfa_states[count - 1].state_label = 'D' + str(count)
+        dfa_states[count - 1].containing_labels = state
         count += 1
 
     labelled_transitions = {}
     for current_state in dfa_states:
         for _state, transitions in dfa_transitions.items():
-           for _input, compare_state in transitions.items():
-            if compare_state == current_state.containing_labels:
-                transitions[_input] = current_state.state_label
+            for _input, compare_state in transitions.items():
+                if compare_state == current_state.containing_labels:
+                    transitions[_input] = current_state.state_label
 
     for state, transitions in dfa_transitions.items():
         for dfa_state in dfa_states:
@@ -230,17 +230,21 @@ def build_dfa(nfa: [NfaBlock], closures, transition_table, closure_transitions):
 
     dfa = Dfa()
     for state in dfa_states:
+        if not finishing_states.isdisjoint(state.containing_labels):
+            state.finishing = True
         dfa.add_state(state)
 
+    dfa.add_transitions(labelled_transitions)
 
-    return 0
+    return dfa
 
 
 def generate_dfa():
     # generate base NFAs
     rule_blocks = generate_rule_blocks()
 
-    # state_list = set(rule_blocks[0].state_list)
+    for block in rule_blocks:
+        block.print_block()
 
     # generate epsilons
     link_epsilons(rule_blocks)
@@ -254,10 +258,14 @@ def generate_dfa():
     # make base closure transition table
     closure_transitions = generate_transition_closures(trans_table)
 
-    # build dfa from starting state
-    build_dfa(rule_blocks, base_closures, trans_table, closure_transitions)
+    # get finishing states
+    finishing_states = get_finishing_states(rule_blocks)
 
-    # get starting state
+    # build dfa from starting state
+    dfa = build_dfa(rule_blocks, base_closures, trans_table, closure_transitions, finishing_states)
+
+    dfa.print_DFA()
+
     return 0
 
 

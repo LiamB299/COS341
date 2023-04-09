@@ -117,18 +117,26 @@ class DfaState:
         for transition in self.transitions:
             ret.append([
                 self.state_label,
-                self.containing_labels,
+                self.containing_labels.__str__(),
                 self.starting,
                 self.finishing,
                 transition.transition_input,
                 transition.to_state.state_label
+            ])
+        if not len(ret):
+            ret.append([
+                self.state_label,
+                self.containing_labels.__str__(),
+                self.starting,
+                self.finishing,
+                "",
+                ""
             ])
         return ret
 
 
 class Dfa:
     start = 0
-    reverse_list = {}
 
     def __init__(self):
         self.states = {}
@@ -139,16 +147,20 @@ class Dfa:
             self.start.starting = True
         self.states[state.state_label] = state
 
-    def find_state(self, containing_labels: set()):
-        for key, state in self.states.items():
-            if state.containing_labels == containing_labels:
-                return state.state_label
-        return 'D0'
+    # def find_state(self, containing_labels: set()):
+    #     for key, state in self.states.items():
+    #         if state.containing_labels == containing_labels:
+    #             return state.state_label
+    #     return 'D0'
 
-    def add_transitions(self, state: '', transition_list: [Transition]):
-        self.states[state].transitions = transition_list
-        for transition in transition_list:
-            transition.to_state.prev.append(self)
+    def add_transitions(self, transition_list):
+        for state, t_list in transition_list.items():
+            transitions = []
+            for t_input, transition in t_list.items():
+                transitions.append(Transition(t_input, self.states[transition]))
+                self.states[transition].prev = state
+            self.states[state].transitions = transitions
+
 
     def get_state(self, state_label):
         try:
@@ -162,9 +174,9 @@ class Dfa:
             data += (state.print_state())
 
         headers = ["Label", "containing states", "Start", "Finishing", "Transition Input", "Next"]
-        table = tabulate(data, headers=headers, tablefmt="pipe")
+        table = tabulate(data, headers=headers, tablefmt="pipe", missingval="?")
 
         with open('file.txt', 'w+') as file:
             file.write(table)
-        # print(table)
-        # print('\n')
+        print(table)
+        print('\n')

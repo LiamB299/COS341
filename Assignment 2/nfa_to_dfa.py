@@ -57,7 +57,7 @@ def generate_transition_closures(transition_table: {}):
             base_new_transition_table[key] = {"input": transition_info.transition_input,
                                               "to_state": []}
 
-    print_table2(base_new_transition_table)
+    # print_table2(base_new_transition_table)
     return base_new_transition_table
 
 
@@ -68,7 +68,6 @@ def generate_basic_closures(nfa_states: [NfaState]):
         df_search(state, visited)
         closures[state.state_label] = visited
     return closures
-
 
 
 def generate_powerset(state_list):
