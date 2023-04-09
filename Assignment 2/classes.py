@@ -42,10 +42,16 @@ class NfaState:
 class NfaBlock:
     expression = ""
     LHS_symbol = ""
+    finishing_states = set([])
     start_symbol: NfaState = 0
     count = 0
+    state_list = []
 
     def append_symbol(self, symbol: NfaState):
+        self.state_list.append(symbol)
+        if symbol.finishing:
+            self.finishing_states.add(symbol.state_label)
+
         if not self.start_symbol:
             self.start_symbol = symbol
             symbol.start = True
@@ -97,27 +103,68 @@ class Transition:
 
 
 class DfaState:
-    containing_labels = []
     finishing = False
     starting = False
-    transitions = []
     prev = []
+    state_label = ''
 
     def __init__(self):
         self.transitions = []
-        self.containing_labels = []
+        self.containing_labels = set()
+
+    def print_state(self):
+        ret = []
+        for transition in self.transitions:
+            ret.append([
+                self.state_label,
+                self.containing_labels,
+                self.starting,
+                self.finishing,
+                transition.transition_input,
+                transition.to_state.state_label
+            ])
+        return ret
 
 
-class DFA:
+class Dfa:
     start = 0
+    reverse_list = {}
 
     def __init__(self):
         self.states = {}
 
-    def add_state(self, state):
+    def add_state(self, state: DfaState):
+        if self.start == 0:
+            self.start = state
+            self.start.starting = True
         self.states[state.state_label] = state
 
-    def add_transitions(self, state, transition_list: [Transition]):
+    def find_state(self, containing_labels: set()):
+        for key, state in self.states.items():
+            if state.containing_labels == containing_labels:
+                return state.state_label
+        return 'D0'
+
+    def add_transitions(self, state: '', transition_list: [Transition]):
         self.states[state].transitions = transition_list
         for transition in transition_list:
             transition.to_state.prev.append(self)
+
+    def get_state(self, state_label):
+        try:
+            return self.states[state_label]
+        except:
+            return self.states[0]
+
+    def print_DFA(self):
+        data = []
+        for key, state in self.states.items():
+            data += (state.print_state())
+
+        headers = ["Label", "containing states", "Start", "Finishing", "Transition Input", "Next"]
+        table = tabulate(data, headers=headers, tablefmt="pipe")
+
+        with open('file.txt', 'w+') as file:
+            file.write(table)
+        # print(table)
+        # print('\n')
