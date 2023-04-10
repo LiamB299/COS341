@@ -180,3 +180,53 @@ class Dfa:
             file.write(table)
         print(table)
         print('\n')
+
+
+class ParseAction:
+    def __init__(self, _type, nfa_block):
+        self.type = _type
+        self.number = nfa_block
+
+    def print_entry(self):
+        return self.type + ' ' + self.number
+
+
+class ParseTable:
+    def __init__(self):
+        self.table = {{}}
+
+    def add_element(self, action: ParseAction, dfa_state: int, symbol: str):
+        try:
+            if self.table[symbol][dfa_state] is not None:
+                raise Exception('Index:  ' + symbol + ',  ' + str(dfa_state) +
+                                ' already exists with item:  ' + self.table[symbol][dfa_state].type)
+        except Exception:
+            print(Exception.__str__())
+        finally:
+            self.table[symbol][dfa_state].append(action)
+
+    def get_element(self, dfa_state: int, symbol: str):
+        try:
+            return self.table[symbol][dfa_state]
+        except KeyError:
+            return ParseAction('none', -1)
+
+    def print_table(self):
+        data = []
+        header = []
+        for x_key, y_col in self.table.items():
+            for y_key, action in y_col.items():
+                header.apppend(y_key)
+
+        for x_key, y_col in self.table.items():
+            row = ["" for i in range(0, len(header) + 1)]
+            for y_key, action in y_col.items():
+                for i, item in enumerate(header):
+                    if item == y_key:
+                        row[i + 1] = item.print_entry
+            row[0] = y_key
+            data.append(row)
+
+        table = tabulate.tabulate(data, header)
+        print(table)
+        print('\n')

@@ -1,4 +1,5 @@
 non_terminals = [
+    "START",
     "PROGR",
     "PROCDEFS",
     "PROC",
@@ -85,6 +86,7 @@ terminals = [
 
 # TOP RULE IS THE START SYMBOL
 rules = [
+    "START ::= PROGR",
     "PROGR ::= ALGO PROCDEFS",
     "PROCDEFS ::= , PROC PROCDEFS",
     "PROCDEFS ::= ε",
