@@ -39,7 +39,7 @@ def generate_transition_table(nfa: [NfaBlock]):
     for block in nfa:
         current = block.start_symbol
         while not current == 0:
-            transitions[current.state_label] = Transition(current.symbol_transition, current.next)
+            transitions[current.state_label] = Transition(current.symbol_transition, current.next, current.terminal_transition)
             current = current.next
     # print_table1(transitions)
     return transitions

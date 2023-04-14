@@ -1,5 +1,5 @@
 from tabulate import tabulate
-
+from definitions2 import *
 
 class NfaState:
     terminal_transition = False
@@ -97,9 +97,10 @@ class NfaBlock:
 
 
 class Transition:
-    def __init__(self, _input, next):
+    def __init__(self, _input, next, is_terminal):
         self.transition_input = _input
         self.to_state = next
+        self.terminal = is_terminal
 
 
 class DfaState:
@@ -157,7 +158,7 @@ class Dfa:
         for state, t_list in transition_list.items():
             transitions = []
             for t_input, transition in t_list.items():
-                transitions.append(Transition(t_input, self.states[transition]))
+                transitions.append(Transition(t_input, self.states[transition], t_input in terminals))
                 self.states[transition].prev = state
             self.states[state].transitions = transitions
 
@@ -192,22 +193,26 @@ class ParseAction:
 
 
 class ParseTable:
-    def __init__(self):
-        self.table = {{}}
+    def __init__(self, size: int):
+        self.table = {}
+        for i in range(0, size):
+            self.table[i] = {}
 
     def add_element(self, action: ParseAction, dfa_state: int, symbol: str):
         try:
-            if self.table[symbol][dfa_state] is not None:
+            if self.table.get(dfa_state).get(symbol) is not None:
                 raise Exception('Index:  ' + symbol + ',  ' + str(dfa_state) +
                                 ' already exists with item:  ' + self.table[symbol][dfa_state].type)
+            else:
+                self.table[dfa_state][symbol] = []
         except Exception:
-            print(Exception.__str__())
+            print(Exception.with_traceback())
         finally:
-            self.table[symbol][dfa_state].append(action)
+            self.table[dfa_state][symbol].append(action)
 
     def get_element(self, dfa_state: int, symbol: str):
         try:
-            return self.table[symbol][dfa_state]
+            return self.table[dfa_state][symbol]
         except KeyError:
             return ParseAction('none', -1)
 

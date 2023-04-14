@@ -1,0 +1,53 @@
+digraph {
+	START
+	"$"
+	PROGR
+	PROCDEFS
+	ALGO
+	SEQ
+	KOMMENT
+	INSTR
+	INPUT
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	3
+	D
+	2
+	D
+	1
+	n
+	g
+	START -> "$"
+	START -> PROGR
+	PROGR -> PROCDEFS
+	PROGR -> ALGO
+	PROCDEFS -> "ε"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "ε"
+	INSTR -> INPUT
+	INPUT -> NUMVAR
+	INPUT -> g
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 3
+	D -> 2
+	D -> 1
+}

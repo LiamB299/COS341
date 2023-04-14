@@ -132,7 +132,7 @@ def link_dfa(dfa, closure_transitions):
         transitions = []
         for input_symbol, to_state in closure_transition['transitions'].items():
             ref_to_state = dfa.get_state(dfa.find_state(to_state))
-            transitions.append(Transition(input_symbol, ref_to_state))
+            transitions.append(Transition(input_symbol, ref_to_state, input_symbol in terminals))
         dfa.add_transitions(current_state, transitions)
     dfa.print_DFA()
 
@@ -264,9 +264,6 @@ def generate_dfa():
     # build dfa from starting state
     dfa = build_dfa(rule_blocks, base_closures, trans_table, closure_transitions, finishing_states)
 
-    dfa.print_DFA()
+    #dfa.print_DFA()
 
-    return 0
-
-
-generate_dfa()
+    return dfa, rule_blocks
