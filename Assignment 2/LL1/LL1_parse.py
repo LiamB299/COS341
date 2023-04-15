@@ -4,7 +4,7 @@ from parse_tree import *
 from LL1_table import *
 import re
 from render_tree import *
-
+import os
 
 def peak(stack: []):
     if len(stack) == 0:
@@ -34,7 +34,7 @@ def make_nodes(RHS: str):
         elif symbol == 'ε':
             continue
         else:
-            raise Exception('Symbol ' + symbol + ' unknown')
+            raise Exception('Symbol "' + symbol + '" unknown')
 
     return nodes
 
@@ -50,12 +50,68 @@ def split_and_reverse(string, word_list):
     return [part for part in parts if part]
 
 
-def parse_LL1_grammar(expression: str, parse_table):
+def validate_comments(expression):
+    arr = []
+    i = 0
+    while not i == len(expression):
+        if expression[i] in '"*':
+            arr.append(expression[i])
+            sub_expression = ''
+            for j in range(i+1, len(expression)):
+                if expression[j] in '*"':
+                    if not len(sub_expression) == 15:
+                        raise Exception('Comment / String too short')
+                    else:
+                        arr.append(sub_expression)
+                        arr.append(expression[j])
+                        i = j+1
+                        break
+                is_ascii(expression[j])
+                sub_expression += expression[j]
+        else:
+            if not expression[i] == ' ':
+                arr.append(expression[i])
+            i += 1
+    return arr
+
+
+def is_ascii(sub):
+    for item in sub:
+        if not ord(item) < 128:
+            raise Exception('Comment / String not Ascii')
+
+
+def remove_whitespace(express):
+    expression = ''
+    comment = False
+    for c in express:
+        if c in '"*':
+            comment = not comment
+        if c == ' ' and not comment:
+            continue
+        else:
+            expression += c
+    return expression
+    # arr = [x for x in expression if not x.isspace()]
+    # for i, symbols in enumerate(arr):
+    #     if bool(re.search(r'\s', symbols)):
+    #         if not i == 0:
+    #             if arr[i-1] in '*"':
+    #                 continue
+    #         else:
+    #             arr[i] = symbols.replace(' ', '')
+    # return arr
+
+
+def parse_LL1_grammar(express: str, parse_table):
     stack: [NT_node | T_node] = []
     node_table = []
 
     # push start non-terminal onto stack
     stack.append(NT_node(non_terminals[0]))
+    expression = remove_whitespace(express)
+    expression = split_expression(expression)
+    expression = validate_comments(expression)
 
     i = 0
     while not len(stack) == 0:
@@ -64,21 +120,34 @@ def parse_LL1_grammar(expression: str, parse_table):
             match_symbol(peak(stack), node_table)
             stack.pop()
             i += 1
-
-        elif (peak(stack).label, expression[i]) not in parse_table:
-            raise Exception('Parse Error')
+        elif (peak(stack).label, expression[i]) not in parse_table and not peak(stack).label == 'C':
+            print(peak(stack).label, expression[i])
+            raise Exception('Parse Error - No Transition')
 
         # non-terminal is found
         # get RHS of symbol
         else:
-            terminal_node = stack.pop()
-            node_table.append(terminal_node)
-            rhs = parse_table[terminal_node.label, expression[i]]
-            rhs = split_and_reverse(rhs, non_terminals)
-            rhs = rhs[::-1]
-            children = make_nodes(rhs)
-            add_children(terminal_node, children)
-            stack += children
+            if peak(stack).label == 'C':
+                sequence = expression[i]
+                while not sequence == '':
+                    terminal_node = stack.pop()
+                    node_table.append(terminal_node)
+                    child = [T_node(sequence[0])]
+                    add_children(terminal_node, child)
+                    stack += child
+                    sequence = sequence[1:]
+                    match_symbol(peak(stack), node_table)
+                    stack.pop()
+                i += 1
+            else:
+                terminal_node = stack.pop()
+                node_table.append(terminal_node)
+                rhs = parse_table[terminal_node.label, expression[i]]
+                rhs = split_and_reverse(rhs, non_terminals)
+                rhs = rhs[::-1]
+                children = make_nodes(rhs)
+                add_children(terminal_node, children)
+                stack += children
 
     return node_table[0]
 
@@ -86,7 +155,7 @@ def parse_LL1_grammar(expression: str, parse_table):
 def bfs_print(node: NT_node | T_node):
     ret = {}
 
-    if node.is_terminal == False:
+    if not node.is_terminal:
         arr = []
         key_arr = []
         for child in node.children:
@@ -116,14 +185,43 @@ def traverse_tree(node, vertices: [], edges: []):
         vertices.append(node.label)
 
 
-def runner(expression: str):
+def split_expression(expression:str):
+    arr = split_and_reverse(expression, terminals)
+    return arr
+
+
+def runner(expression= '', file=''):
+    if expression == '':
+        if file == '':
+            file = input("Please input a filename or path with extension:\n")
+            if not os.path.exists(file):
+                print("No file found for path:\n"+file)
+                return
+
+        with open(file, 'r') as open_file:
+            for line in open_file:
+                expression += line.rstrip()
+
+    print('Building parse table')
     parse_table = build_LL1_table()
-    match_table = parse_LL1_grammar(expression + '$', parse_table)
+
+    print('Parsing expression')
+    try:
+        match_table = parse_LL1_grammar(expression + '$', parse_table)
+    except Exception as e:
+        print(str(e))
+        # e.with_traceback()
+        return 0
     # print(match_table)
+
+    print('Parse Complete')
     vertices = []
     edges = []
     traverse_tree(match_table, vertices, edges)
     return render_graph(vertices, edges)
 
 
-runner("gn123")
+# runner("n26:=a(n36,n49)")
+# runner('n2:=a(n3,n4);s5:="PROCDEFPROCDEF ";h')
+# runner('n2:=a(n3,n4);s5:="PROCDEFPROCDEF ";h;i(T)t{h}e{h}')
+runner('', 'test_cases/t1')

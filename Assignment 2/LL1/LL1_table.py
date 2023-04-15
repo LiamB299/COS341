@@ -2,6 +2,12 @@ from definitions import *
 import tabulate
 
 
+def get_symbol_follow(symbol):
+    for i, nt in enumerate(non_terminals):
+        if nt == symbol:
+            return follow[i]
+
+
 def build_LL1_table():
     table = {}
     for i, production in enumerate(rules):
@@ -16,6 +22,19 @@ def build_LL1_table():
 
     print_LL1_table(table)
     return table
+
+# def build_LL1_table():
+#     table = {}
+#     for i, production in enumerate(rules):
+#         prod_symbol, production = production.replace(" ", "").split("::=")
+#         for terminal in terminals:
+#             if terminal in first[i]:
+#                 table[(prod_symbol, terminal)] = production
+#             elif nullable[i] and terminal in get_symbol_follow(prod_symbol):
+#                 table[(prod_symbol, terminal)] = production
+#
+#     print_LL1_table(table)
+#     return table
 
 
 def print_LL1_table(LL1_table):
