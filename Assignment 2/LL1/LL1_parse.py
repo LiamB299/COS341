@@ -92,15 +92,31 @@ def remove_whitespace(express):
         else:
             expression += c
     return expression
-    # arr = [x for x in expression if not x.isspace()]
-    # for i, symbols in enumerate(arr):
-    #     if bool(re.search(r'\s', symbols)):
-    #         if not i == 0:
-    #             if arr[i-1] in '*"':
-    #                 continue
-    #         else:
-    #             arr[i] = symbols.replace(' ', '')
-    # return arr
+
+
+def check_floats(expression):
+    i = 0
+    while not i == len(expression):
+        symbol = expression[i]
+        if symbol == '.':
+            if i < 1:
+                raise Exception('Bad floats')
+            elif expression[i-2].isdigit() or not expression[i-1] == '0':
+                i += 1
+                continue
+            else:
+                f = ''
+                for j in range(i-1, i+3):
+                    f += expression[j]
+                expression.pop(i - 1)
+                expression.pop(i - 1)
+                expression.pop(i - 1)
+                expression.pop(i - 1)
+                expression.insert(i-1, f)
+                i -= 1
+        i += 1
+    return expression
+
 
 
 def parse_LL1_grammar(express: str, parse_table):
@@ -112,6 +128,7 @@ def parse_LL1_grammar(express: str, parse_table):
     expression = remove_whitespace(express)
     expression = split_expression(expression)
     expression = validate_comments(expression)
+    expression = check_floats(expression)
 
     i = 0
     while not len(stack) == 0:
@@ -224,4 +241,4 @@ def runner(expression= '', file=''):
 # runner("n26:=a(n36,n49)")
 # runner('n2:=a(n3,n4);s5:="PROCDEFPROCDEF ";h')
 # runner('n2:=a(n3,n4);s5:="PROCDEFPROCDEF ";h;i(T)t{h}e{h}')
-runner('', 'test_cases/t1')
+# runner('', 'test_cases/t5')
