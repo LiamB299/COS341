@@ -1,7 +1,5 @@
 import re
-from definitions2 import non_terminals, terminals, rules
 from classes import *
-import uuid
 from nfa_to_dfa import *
 
 

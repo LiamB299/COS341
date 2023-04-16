@@ -4,6 +4,802 @@ digraph {
 	PROGR
 	PROCDEFS
 	PROCDEFS
+	PROCDEFS
+	PROCDEFS
+	PROCDEFS
+	PROCDEFS
+	PROCDEFS
+	PROCDEFS
+	PROC
+	"}"
+	PROGR
+	PROCDEFS
+	ALGO
+	SEQ
+	KOMMENT
+	"*"
+	C
+	" "
+	C
+	6
+	C
+	" "
+	C
+	" "
+	C
+	t
+	C
+	e
+	C
+	s
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	"*"
+	INSTR
+	BRANCH
+	ELSE
+	"}"
+	ALGO
+	SEQ
+	ALGO
+	SEQ
+	ALGO
+	SEQ
+	KOMMENT
+	"*"
+	C
+	" "
+	C
+	5
+	C
+	" "
+	C
+	" "
+	C
+	t
+	C
+	e
+	C
+	s
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	"*"
+	INSTR
+	LOOP
+	"}"
+	ALGO
+	SEQ
+	ALGO
+	SEQ
+	KOMMENT
+	INSTR
+	ASSIGN
+	STRI
+	"\""
+	C
+	0
+	C
+	0
+	C
+	5
+	C
+	" "
+	C
+	e
+	C
+	u
+	C
+	l
+	C
+	a
+	C
+	v
+	C
+	g
+	C
+	n
+	C
+	i
+	C
+	r
+	C
+	t
+	C
+	s
+	"\""
+	"/="
+	STRINGV
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	1
+	D
+	0
+	D
+	5
+	s
+	";"
+	KOMMENT
+	"*"
+	C
+	1
+	C
+	0
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	C
+	" "
+	C
+	p
+	C
+	o
+	C
+	o
+	C
+	l
+	"*"
+	INSTR
+	INPUT
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	1
+	D
+	3
+	n
+	g
+	"){"
+	BOOLEXPR
+	CMPR
+	")"
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	4
+	D
+	3
+	n
+	","
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	1
+	D
+	3
+	n
+	">("
+	"w("
+	";"
+	KOMMENT
+	"*"
+	C
+	0
+	C
+	3
+	C
+	" "
+	C
+	" "
+	C
+	t
+	C
+	e
+	C
+	s
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	"*"
+	INSTR
+	ASSIGN
+	BOOLEXPR
+	LOGIC
+	")"
+	BOOLEXPR
+	CMPR
+	")"
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	3
+	D
+	2
+	D
+	3
+	n
+	","
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	2
+	D
+	1
+	D
+	3
+	n
+	"E("
+	","
+	BOOLEXPR
+	LOGIC
+	")"
+	BOOLEXPR
+	LOGIC
+	BOOLVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	1
+	D
+	1
+	D
+	3
+	b
+	","
+	BOOLEXPR
+	LOGIC
+	")"
+	BOOLEXPR
+	LOGIC
+	BOOLVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	1
+	D
+	6
+	D
+	3
+	b
+	"!("
+	"v("
+	"^("
+	"/="
+	BOOLVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	5
+	D
+	3
+	b
+	";"
+	KOMMENT
+	INSTR
+	ASSIGN
+	STRI
+	"\""
+	C
+	e
+	C
+	e
+	C
+	m
+	C
+	" "
+	C
+	n
+	C
+	g
+	C
+	i
+	C
+	s
+	C
+	s
+	C
+	a
+	C
+	" "
+	C
+	e
+	C
+	s
+	C
+	l
+	C
+	e
+	"\""
+	"/="
+	STRINGV
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	4
+	D
+	0
+	D
+	6
+	s
+	"e{"
+	"}"
+	ALGO
+	SEQ
+	KOMMENT
+	INSTR
+	ASSIGN
+	STRI
+	"\""
+	C
+	e
+	C
+	e
+	C
+	m
+	C
+	" "
+	C
+	n
+	C
+	g
+	C
+	i
+	C
+	s
+	C
+	s
+	C
+	a
+	C
+	" "
+	C
+	n
+	C
+	e
+	C
+	h
+	C
+	t
+	"\""
+	"/="
+	STRINGV
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	3
+	D
+	0
+	D
+	6
+	s
+	")t{"
+	BOOLEXPR
+	LOGIC
+	")"
+	BOOLEXPR
+	LOGIC
+	BOOLVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	2
+	D
+	0
+	D
+	6
+	b
+	","
+	BOOLEXPR
+	LOGIC
+	BOOLVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	1
+	D
+	0
+	D
+	6
+	b
+	"^("
+	"i("
+	"{"
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	0
+	D
+	6
+	p
+	","
+	PROC
+	"}"
+	PROGR
+	PROCDEFS
+	ALGO
+	SEQ
+	KOMMENT
+	"*"
+	C
+	" "
+	C
+	5
+	C
+	" "
+	C
+	" "
+	C
+	t
+	C
+	e
+	C
+	s
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	"*"
+	INSTR
+	LOOP
+	"}"
+	ALGO
+	SEQ
+	ALGO
+	SEQ
+	KOMMENT
+	INSTR
+	ASSIGN
+	STRI
+	"\""
+	C
+	0
+	C
+	0
+	C
+	5
+	C
+	" "
+	C
+	e
+	C
+	u
+	C
+	l
+	C
+	a
+	C
+	v
+	C
+	g
+	C
+	n
+	C
+	i
+	C
+	r
+	C
+	t
+	C
+	s
+	"\""
+	"/="
+	STRINGV
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	1
+	D
+	0
+	D
+	5
+	s
+	";"
+	KOMMENT
+	"*"
+	C
+	1
+	C
+	0
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	C
+	" "
+	C
+	p
+	C
+	o
+	C
+	o
+	C
+	l
+	"*"
+	INSTR
+	INPUT
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	1
+	D
+	3
+	n
+	g
+	"){"
+	BOOLEXPR
+	CMPR
+	")"
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	4
+	D
+	3
+	n
+	","
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	1
+	D
+	3
+	n
+	">("
+	"w("
+	"{"
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	0
+	D
+	5
+	p
+	","
+	PROC
+	"}"
+	PROGR
+	PROCDEFS
+	ALGO
+	SEQ
+	KOMMENT
+	"*"
+	C
+	" "
+	C
+	4
+	C
+	" "
+	C
+	" "
+	C
+	t
+	C
+	e
+	C
+	s
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	"*"
+	INSTR
+	CALL
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	0
+	D
+	4
+	cp
+	"{"
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	0
+	D
+	4
+	p
+	","
 	PROC
 	"}"
 	PROGR
@@ -73,35 +869,35 @@ digraph {
 	KOMMENT
 	"*"
 	C
-	" "
+	0
+	C
+	3
 	C
 	" "
 	C
 	" "
 	C
-	" "
+	t
+	C
+	e
+	C
+	s
 	C
 	" "
 	C
-	" "
+	t
 	C
-	" "
+	n
 	C
-	" "
+	e
 	C
-	" "
+	m
 	C
-	" "
+	m
 	C
-	" "
+	o
 	C
-	" "
-	C
-	" "
-	C
-	" "
-	C
-	" "
+	c
 	"*"
 	INSTR
 	ASSIGN
@@ -288,11 +1084,513 @@ digraph {
 	DIGITS
 	MORE
 	D
+	2
+	D
 	0
+	D
+	3
+	p
+	","
+	PROC
+	"}"
+	PROGR
+	PROCDEFS
+	ALGO
+	SEQ
+	ALGO
+	SEQ
+	ALGO
+	SEQ
+	ALGO
+	SEQ
+	ALGO
+	SEQ
+	KOMMENT
+	"*"
+	C
+	1
+	C
+	3
+	C
+	" "
+	C
+	" "
+	C
+	t
+	C
+	e
+	C
+	s
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	"*"
+	INSTR
+	ASSIGN
+	NUMEXPR
+	DECNUM
+	POS
+	D
+	0
+	D
+	0
+	"."
+	INT
+	MORE
+	4
+	"/="
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	1
+	D
+	9
+	D
+	3
+	n
+	";"
+	KOMMENT
+	INSTR
+	ASSIGN
+	NUMEXPR
+	DECNUM
+	NEG
+	POS
+	D
+	0
+	D
+	0
+	"."
+	INT
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	2
+	"-"
+	"/="
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	9
+	D
+	3
+	n
+	";"
+	KOMMENT
+	INSTR
+	ASSIGN
+	NUMEXPR
+	DECNUM
+	0.00
+	"/="
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	8
+	D
+	3
+	n
+	";"
+	KOMMENT
+	INSTR
+	ASSIGN
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	7
+	D
+	3
+	n
+	"/="
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	6
+	D
+	3
+	n
+	";"
+	KOMMENT
+	"*"
+	C
+	0
+	C
+	3
+	C
+	" "
+	C
+	" "
+	C
+	t
+	C
+	e
+	C
+	s
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	"*"
+	INSTR
+	ASSIGN
+	NUMEXPR
+	")"
+	NUMEXPR
+	")"
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	5
+	D
+	3
+	n
+	","
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
 	D
 	0
 	D
 	4
+	D
+	3
+	n
+	"d("
+	","
+	NUMEXPR
+	")"
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	3
+	D
+	3
+	n
+	","
+	NUMEXPR
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	2
+	D
+	3
+	n
+	"m("
+	"a("
+	"/="
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	1
+	D
+	3
+	n
+	"{"
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	0
+	D
+	3
+	p
+	","
+	PROC
+	"}"
+	PROGR
+	PROCDEFS
+	ALGO
+	SEQ
+	ALGO
+	SEQ
+	KOMMENT
+	"*"
+	C
+	2
+	C
+	2
+	C
+	" "
+	C
+	" "
+	C
+	t
+	C
+	e
+	C
+	s
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	"*"
+	INSTR
+	OUTPUT
+	TEXT
+	STRINGV
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	2
+	D
+	2
+	s
+	r
+	";"
+	KOMMENT
+	"*"
+	C
+	1
+	C
+	2
+	C
+	" "
+	C
+	" "
+	C
+	t
+	C
+	e
+	C
+	s
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	"*"
+	INSTR
+	OUTPUT
+	VALUE
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	1
+	D
+	2
+	n
+	o
+	"{"
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	0
+	D
+	2
+	p
+	","
+	PROC
+	"}"
+	PROGR
+	PROCDEFS
+	ALGO
+	SEQ
+	KOMMENT
+	"*"
+	C
+	" "
+	C
+	1
+	C
+	" "
+	C
+	" "
+	C
+	t
+	C
+	e
+	C
+	s
+	C
+	" "
+	C
+	t
+	C
+	n
+	C
+	e
+	C
+	m
+	C
+	m
+	C
+	o
+	C
+	c
+	"*"
+	INSTR
+	INPUT
+	NUMVAR
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	1
+	D
+	1
+	n
+	g
+	"{"
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	DIGITS
+	MORE
+	D
+	0
+	D
+	0
+	D
+	1
 	p
 	","
 	ALGO
@@ -307,7 +1605,844 @@ digraph {
 	PROCDEFS -> PROCDEFS
 	PROCDEFS -> PROC
 	PROCDEFS -> ","
+	PROCDEFS -> PROCDEFS
+	PROCDEFS -> PROC
+	PROCDEFS -> ","
+	PROCDEFS -> PROCDEFS
+	PROCDEFS -> PROC
+	PROCDEFS -> ","
+	PROCDEFS -> PROCDEFS
+	PROCDEFS -> PROC
+	PROCDEFS -> ","
+	PROCDEFS -> PROCDEFS
+	PROCDEFS -> PROC
+	PROCDEFS -> ","
+	PROCDEFS -> PROCDEFS
+	PROCDEFS -> PROC
+	PROCDEFS -> ","
+	PROCDEFS -> PROCDEFS
+	PROCDEFS -> PROC
+	PROCDEFS -> ","
 	PROCDEFS -> "ε"
+	PROC -> "}"
+	PROC -> PROGR
+	PROC -> "{"
+	PROC -> DIGITS
+	PROC -> p
+	PROGR -> PROCDEFS
+	PROGR -> ALGO
+	PROCDEFS -> "ε"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> " "
+	C -> 6
+	C -> " "
+	C -> " "
+	C -> t
+	C -> e
+	C -> s
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	INSTR -> BRANCH
+	BRANCH -> ELSE
+	BRANCH -> "}"
+	BRANCH -> ALGO
+	BRANCH -> ")t{"
+	BRANCH -> BOOLEXPR
+	BRANCH -> "i("
+	ELSE -> "}"
+	ELSE -> ALGO
+	ELSE -> "e{"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> ALGO
+	SEQ -> ";"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> ALGO
+	SEQ -> ";"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> " "
+	C -> 5
+	C -> " "
+	C -> " "
+	C -> t
+	C -> e
+	C -> s
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	INSTR -> LOOP
+	LOOP -> "}"
+	LOOP -> ALGO
+	LOOP -> "){"
+	LOOP -> BOOLEXPR
+	LOOP -> "w("
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> ALGO
+	SEQ -> ";"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "ε"
+	INSTR -> ASSIGN
+	ASSIGN -> STRI
+	ASSIGN -> "/="
+	ASSIGN -> STRINGV
+	STRI -> "\""
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> "\""
+	C -> 0
+	C -> 0
+	C -> 5
+	C -> " "
+	C -> e
+	C -> u
+	C -> l
+	C -> a
+	C -> v
+	C -> g
+	C -> n
+	C -> i
+	C -> r
+	C -> t
+	C -> s
+	STRINGV -> DIGITS
+	STRINGV -> s
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 1
+	D -> 0
+	D -> 5
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> 1
+	C -> 0
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	C -> " "
+	C -> p
+	C -> o
+	C -> o
+	C -> l
+	INSTR -> INPUT
+	INPUT -> NUMVAR
+	INPUT -> g
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 1
+	D -> 3
+	BOOLEXPR -> CMPR
+	CMPR -> ")"
+	CMPR -> NUMEXPR
+	CMPR -> ","
+	CMPR -> NUMEXPR
+	CMPR -> ">("
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 4
+	D -> 3
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 1
+	D -> 3
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> 0
+	C -> 3
+	C -> " "
+	C -> " "
+	C -> t
+	C -> e
+	C -> s
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	INSTR -> ASSIGN
+	ASSIGN -> BOOLEXPR
+	ASSIGN -> "/="
+	ASSIGN -> BOOLVAR
+	BOOLEXPR -> LOGIC
+	LOGIC -> ")"
+	LOGIC -> BOOLEXPR
+	LOGIC -> ","
+	LOGIC -> BOOLEXPR
+	LOGIC -> "^("
+	BOOLEXPR -> CMPR
+	CMPR -> ")"
+	CMPR -> NUMEXPR
+	CMPR -> ","
+	CMPR -> NUMEXPR
+	CMPR -> "E("
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 3
+	D -> 2
+	D -> 3
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 2
+	D -> 1
+	D -> 3
+	BOOLEXPR -> LOGIC
+	LOGIC -> ")"
+	LOGIC -> BOOLEXPR
+	LOGIC -> ","
+	LOGIC -> BOOLEXPR
+	LOGIC -> "v("
+	BOOLEXPR -> LOGIC
+	LOGIC -> BOOLVAR
+	BOOLVAR -> DIGITS
+	BOOLVAR -> b
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 1
+	D -> 1
+	D -> 3
+	BOOLEXPR -> LOGIC
+	LOGIC -> ")"
+	LOGIC -> BOOLEXPR
+	LOGIC -> "!("
+	BOOLEXPR -> LOGIC
+	LOGIC -> BOOLVAR
+	BOOLVAR -> DIGITS
+	BOOLVAR -> b
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 1
+	D -> 6
+	D -> 3
+	BOOLVAR -> DIGITS
+	BOOLVAR -> b
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 5
+	D -> 3
+	KOMMENT -> "ε"
+	INSTR -> ASSIGN
+	ASSIGN -> STRI
+	ASSIGN -> "/="
+	ASSIGN -> STRINGV
+	STRI -> "\""
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> "\""
+	C -> e
+	C -> e
+	C -> m
+	C -> " "
+	C -> n
+	C -> g
+	C -> i
+	C -> s
+	C -> s
+	C -> a
+	C -> " "
+	C -> e
+	C -> s
+	C -> l
+	C -> e
+	STRINGV -> DIGITS
+	STRINGV -> s
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 4
+	D -> 0
+	D -> 6
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "ε"
+	INSTR -> ASSIGN
+	ASSIGN -> STRI
+	ASSIGN -> "/="
+	ASSIGN -> STRINGV
+	STRI -> "\""
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> "\""
+	C -> e
+	C -> e
+	C -> m
+	C -> " "
+	C -> n
+	C -> g
+	C -> i
+	C -> s
+	C -> s
+	C -> a
+	C -> " "
+	C -> n
+	C -> e
+	C -> h
+	C -> t
+	STRINGV -> DIGITS
+	STRINGV -> s
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 3
+	D -> 0
+	D -> 6
+	BOOLEXPR -> LOGIC
+	LOGIC -> ")"
+	LOGIC -> BOOLEXPR
+	LOGIC -> ","
+	LOGIC -> BOOLEXPR
+	LOGIC -> "^("
+	BOOLEXPR -> LOGIC
+	LOGIC -> BOOLVAR
+	BOOLVAR -> DIGITS
+	BOOLVAR -> b
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 2
+	D -> 0
+	D -> 6
+	BOOLEXPR -> LOGIC
+	LOGIC -> BOOLVAR
+	BOOLVAR -> DIGITS
+	BOOLVAR -> b
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 1
+	D -> 0
+	D -> 6
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 0
+	D -> 6
+	PROC -> "}"
+	PROC -> PROGR
+	PROC -> "{"
+	PROC -> DIGITS
+	PROC -> p
+	PROGR -> PROCDEFS
+	PROGR -> ALGO
+	PROCDEFS -> "ε"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> " "
+	C -> 5
+	C -> " "
+	C -> " "
+	C -> t
+	C -> e
+	C -> s
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	INSTR -> LOOP
+	LOOP -> "}"
+	LOOP -> ALGO
+	LOOP -> "){"
+	LOOP -> BOOLEXPR
+	LOOP -> "w("
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> ALGO
+	SEQ -> ";"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "ε"
+	INSTR -> ASSIGN
+	ASSIGN -> STRI
+	ASSIGN -> "/="
+	ASSIGN -> STRINGV
+	STRI -> "\""
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> C
+	STRI -> "\""
+	C -> 0
+	C -> 0
+	C -> 5
+	C -> " "
+	C -> e
+	C -> u
+	C -> l
+	C -> a
+	C -> v
+	C -> g
+	C -> n
+	C -> i
+	C -> r
+	C -> t
+	C -> s
+	STRINGV -> DIGITS
+	STRINGV -> s
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 1
+	D -> 0
+	D -> 5
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> 1
+	C -> 0
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	C -> " "
+	C -> p
+	C -> o
+	C -> o
+	C -> l
+	INSTR -> INPUT
+	INPUT -> NUMVAR
+	INPUT -> g
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 1
+	D -> 3
+	BOOLEXPR -> CMPR
+	CMPR -> ")"
+	CMPR -> NUMEXPR
+	CMPR -> ","
+	CMPR -> NUMEXPR
+	CMPR -> ">("
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 4
+	D -> 3
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 1
+	D -> 3
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 0
+	D -> 5
+	PROC -> "}"
+	PROC -> PROGR
+	PROC -> "{"
+	PROC -> DIGITS
+	PROC -> p
+	PROGR -> PROCDEFS
+	PROGR -> ALGO
+	PROCDEFS -> "ε"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> " "
+	C -> 4
+	C -> " "
+	C -> " "
+	C -> t
+	C -> e
+	C -> s
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	INSTR -> CALL
+	CALL -> DIGITS
+	CALL -> cp
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 0
+	D -> 4
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 0
+	D -> 4
 	PROC -> "}"
 	PROC -> PROGR
 	PROC -> "{"
@@ -408,21 +2543,21 @@ digraph {
 	KOMMENT -> C
 	KOMMENT -> C
 	KOMMENT -> "*"
+	C -> 0
+	C -> 3
 	C -> " "
 	C -> " "
+	C -> t
+	C -> e
+	C -> s
 	C -> " "
-	C -> " "
-	C -> " "
-	C -> " "
-	C -> " "
-	C -> " "
-	C -> " "
-	C -> " "
-	C -> " "
-	C -> " "
-	C -> " "
-	C -> " "
-	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
 	INSTR -> ASSIGN
 	ASSIGN -> BOOLEXPR
 	ASSIGN -> "/="
@@ -611,9 +2746,532 @@ digraph {
 	DIGITS -> MORE
 	DIGITS -> D
 	MORE -> "ε"
+	D -> 2
 	D -> 0
+	D -> 3
+	PROC -> "}"
+	PROC -> PROGR
+	PROC -> "{"
+	PROC -> DIGITS
+	PROC -> p
+	PROGR -> PROCDEFS
+	PROGR -> ALGO
+	PROCDEFS -> "ε"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> ALGO
+	SEQ -> ";"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> ALGO
+	SEQ -> ";"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> ALGO
+	SEQ -> ";"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> ALGO
+	SEQ -> ";"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> 1
+	C -> 3
+	C -> " "
+	C -> " "
+	C -> t
+	C -> e
+	C -> s
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	INSTR -> ASSIGN
+	ASSIGN -> NUMEXPR
+	ASSIGN -> "/="
+	ASSIGN -> NUMVAR
+	NUMEXPR -> DECNUM
+	DECNUM -> POS
+	POS -> D
+	POS -> D
+	POS -> "."
+	POS -> INT
+	D -> 0
+	D -> 0
+	INT -> MORE
+	INT -> 4
+	MORE -> "ε"
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 1
+	D -> 9
+	D -> 3
+	KOMMENT -> "ε"
+	INSTR -> ASSIGN
+	ASSIGN -> NUMEXPR
+	ASSIGN -> "/="
+	ASSIGN -> NUMVAR
+	NUMEXPR -> DECNUM
+	DECNUM -> NEG
+	NEG -> POS
+	NEG -> "-"
+	POS -> D
+	POS -> D
+	POS -> "."
+	POS -> INT
+	D -> 0
+	D -> 0
+	INT -> MORE
+	INT -> 2
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 9
+	D -> 3
+	KOMMENT -> "ε"
+	INSTR -> ASSIGN
+	ASSIGN -> NUMEXPR
+	ASSIGN -> "/="
+	ASSIGN -> NUMVAR
+	NUMEXPR -> DECNUM
+	DECNUM -> 0.00
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 8
+	D -> 3
+	KOMMENT -> "ε"
+	INSTR -> ASSIGN
+	ASSIGN -> NUMEXPR
+	ASSIGN -> "/="
+	ASSIGN -> NUMVAR
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 7
+	D -> 3
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 6
+	D -> 3
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> 0
+	C -> 3
+	C -> " "
+	C -> " "
+	C -> t
+	C -> e
+	C -> s
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	INSTR -> ASSIGN
+	ASSIGN -> NUMEXPR
+	ASSIGN -> "/="
+	ASSIGN -> NUMVAR
+	NUMEXPR -> ")"
+	NUMEXPR -> NUMEXPR
+	NUMEXPR -> ","
+	NUMEXPR -> NUMEXPR
+	NUMEXPR -> "a("
+	NUMEXPR -> ")"
+	NUMEXPR -> NUMEXPR
+	NUMEXPR -> ","
+	NUMEXPR -> NUMEXPR
+	NUMEXPR -> "d("
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 5
+	D -> 3
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
 	D -> 0
 	D -> 4
+	D -> 3
+	NUMEXPR -> ")"
+	NUMEXPR -> NUMEXPR
+	NUMEXPR -> ","
+	NUMEXPR -> NUMEXPR
+	NUMEXPR -> "m("
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 3
+	D -> 3
+	NUMEXPR -> NUMVAR
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 2
+	D -> 3
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 1
+	D -> 3
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 0
+	D -> 3
+	PROC -> "}"
+	PROC -> PROGR
+	PROC -> "{"
+	PROC -> DIGITS
+	PROC -> p
+	PROGR -> PROCDEFS
+	PROGR -> ALGO
+	PROCDEFS -> "ε"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> ALGO
+	SEQ -> ";"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> 2
+	C -> 2
+	C -> " "
+	C -> " "
+	C -> t
+	C -> e
+	C -> s
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	INSTR -> OUTPUT
+	OUTPUT -> TEXT
+	TEXT -> STRINGV
+	TEXT -> r
+	STRINGV -> DIGITS
+	STRINGV -> s
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 2
+	D -> 2
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> 1
+	C -> 2
+	C -> " "
+	C -> " "
+	C -> t
+	C -> e
+	C -> s
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	INSTR -> OUTPUT
+	OUTPUT -> VALUE
+	VALUE -> NUMVAR
+	VALUE -> o
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 1
+	D -> 2
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 0
+	D -> 2
+	PROC -> "}"
+	PROC -> PROGR
+	PROC -> "{"
+	PROC -> DIGITS
+	PROC -> p
+	PROGR -> PROCDEFS
+	PROGR -> ALGO
+	PROCDEFS -> "ε"
+	ALGO -> SEQ
+	ALGO -> KOMMENT
+	ALGO -> INSTR
+	SEQ -> "ε"
+	KOMMENT -> "*"
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> C
+	KOMMENT -> "*"
+	C -> " "
+	C -> 1
+	C -> " "
+	C -> " "
+	C -> t
+	C -> e
+	C -> s
+	C -> " "
+	C -> t
+	C -> n
+	C -> e
+	C -> m
+	C -> m
+	C -> o
+	C -> c
+	INSTR -> INPUT
+	INPUT -> NUMVAR
+	INPUT -> g
+	NUMVAR -> DIGITS
+	NUMVAR -> n
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 1
+	D -> 1
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> DIGITS
+	DIGITS -> MORE
+	DIGITS -> D
+	MORE -> "ε"
+	D -> 0
+	D -> 0
+	D -> 1
 	ALGO -> SEQ
 	ALGO -> KOMMENT
 	ALGO -> INSTR

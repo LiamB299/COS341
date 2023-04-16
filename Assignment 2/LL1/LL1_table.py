@@ -20,7 +20,7 @@ def build_LL1_table():
                     elif nullable[i] and terminal in follow[j]:
                         table[(prod_symbol, terminal)] = production
 
-    print_LL1_table(table)
+    # print_LL1_table(table)
     return table
 
 # def build_LL1_table():

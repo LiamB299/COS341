@@ -1,6 +1,3 @@
-import tabulate
-from classes import *
-from definitions2 import *
 from nfa_generator import *
 
 

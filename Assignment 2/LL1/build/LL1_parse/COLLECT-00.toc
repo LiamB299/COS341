@@ -1,0 +1,22 @@
+([('LL1_parse.exe',
+   'C:\\Users\\liamb\\Documents\\Documents\\University\\Final '
+   'Year\\COS341\\Assignments\\GIT\\COS341\\Assignment '
+   '2\\LL1\\build\\LL1_parse\\LL1_parse.exe',
+   'EXECUTABLE'),
+  ('VCRUNTIME140.dll', 'C:\\Python311\\VCRUNTIME140.dll', 'BINARY'),
+  ('python311.dll', 'C:\\Python311\\python311.dll', 'BINARY'),
+  ('_decimal.pyd', 'C:\\Python311\\DLLs\\_decimal.pyd', 'EXTENSION'),
+  ('_hashlib.pyd', 'C:\\Python311\\DLLs\\_hashlib.pyd', 'EXTENSION'),
+  ('_lzma.pyd', 'C:\\Python311\\DLLs\\_lzma.pyd', 'EXTENSION'),
+  ('_bz2.pyd', 'C:\\Python311\\DLLs\\_bz2.pyd', 'EXTENSION'),
+  ('select.pyd', 'C:\\Python311\\DLLs\\select.pyd', 'EXTENSION'),
+  ('_socket.pyd', 'C:\\Python311\\DLLs\\_socket.pyd', 'EXTENSION'),
+  ('unicodedata.pyd', 'C:\\Python311\\DLLs\\unicodedata.pyd', 'EXTENSION'),
+  ('_ssl.pyd', 'C:\\Python311\\DLLs\\_ssl.pyd', 'EXTENSION'),
+  ('libcrypto-1_1.dll', 'C:\\Python311\\DLLs\\libcrypto-1_1.dll', 'BINARY'),
+  ('libssl-1_1.dll', 'C:\\Python311\\DLLs\\libssl-1_1.dll', 'BINARY'),
+  ('base_library.zip',
+   'C:\\Users\\liamb\\Documents\\Documents\\University\\Final '
+   'Year\\COS341\\Assignments\\GIT\\COS341\\Assignment '
+   '2\\LL1\\build\\LL1_parse\\base_library.zip',
+   'DATA')],)

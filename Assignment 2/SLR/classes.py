@@ -1,5 +1,5 @@
 from tabulate import tabulate
-from definitions2 import *
+from SLR.definitions2 import *
 
 class NfaState:
     terminal_transition = False

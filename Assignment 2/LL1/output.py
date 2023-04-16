@@ -4,7 +4,7 @@ from parse_tree import *
 def traverse_tree(current_node: NT_node | T_node, file, indents):
     if not current_node.is_terminal:
         if len(current_node.children) == 0:
-            file.write(indents + f'<{current_node.label} children=\'[]\'></{current_node.label}>')
+            # file.write(indents + f'<{current_node.label} children=\'[]\'></{current_node.label}>')
             return
 
         ids = ''

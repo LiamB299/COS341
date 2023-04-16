@@ -1,11 +1,10 @@
-from definitions2 import *
-import tabulate
 from parse_tree import *
 from LL1_table import *
 import re
 from render_tree import *
 import os
 from output import write_to_xml
+
 
 def peak(stack: []):
     if len(stack) == 0:
@@ -58,14 +57,14 @@ def validate_comments(expression):
         if expression[i] in '"*':
             arr.append(expression[i])
             sub_expression = ''
-            for j in range(i+1, len(expression)):
+            for j in range(i + 1, len(expression)):
                 if expression[j] in '*"':
                     if not len(sub_expression) == 15:
                         raise Exception('Comment / String too short')
                     else:
                         arr.append(sub_expression)
                         arr.append(expression[j])
-                        i = j+1
+                        i = j + 1
                         break
                 is_ascii(expression[j])
                 sub_expression += expression[j]
@@ -102,24 +101,24 @@ def check_floats(expression):
         if symbol == '.':
             if i < 1:
                 raise Exception('Bad floats')
-            elif expression[i-2].isdigit() or not expression[i-1] == '0':
+            elif expression[i - 2].isdigit() or not expression[i - 1] == '0':
                 i += 1
                 continue
             else:
                 f = ''
-                for j in range(i-1, i+3):
+                for j in range(i - 1, i + 3):
                     f += expression[j]
                 expression.pop(i - 1)
                 expression.pop(i - 1)
                 expression.pop(i - 1)
                 expression.pop(i - 1)
-                expression.insert(i-1, f)
+                expression.insert(i - 1, f)
                 i -= 1
         i += 1
     return expression
 
 
-
+# build with: python -m PyInstaller runner.py
 def parse_LL1_grammar(express: str, parse_table):
     stack: [NT_node | T_node] = []
     node_table = []
@@ -203,17 +202,19 @@ def traverse_tree(node, vertices: [], edges: []):
         vertices.append(node.label)
 
 
-def split_expression(expression:str):
+def split_expression(expression: str):
     arr = split_and_reverse(expression, terminals)
     return arr
 
 
-def runner(expression= '', file=''):
+def runner(expression='', file=''):
     if expression == '':
         if file == '':
             file = input("Please input a filename or path with extension:\n")
+            print(f"Looking for file: {file}...")
             if not os.path.exists(file):
-                print("No file found for path:\n"+file)
+                print(f"No file found for path: {file} ...closing")
+                input()
                 return
 
         with open(file, 'r') as open_file:
@@ -227,8 +228,10 @@ def runner(expression= '', file=''):
     try:
         match_table = parse_LL1_grammar(expression + '$', parse_table)
     except Exception as e:
+        print('Parse Error!!!')
         print(str(e))
         # e.with_traceback()
+        input()
         return 0
     # print(match_table)
 
@@ -237,11 +240,11 @@ def runner(expression= '', file=''):
     edges = []
     traverse_tree(match_table, vertices, edges)
     render_graph(vertices, edges)
-    write_to_xml(match_table)
+    write_to_xml(match_table.children[1])
+    print("Written to XML")
+    input()
     return
 
 
-# runner("n26:=a(n36,n49)")
-# runner('n2:=a(n3,n4);s5:="PROCDEFPROCDEF ";h')
-# runner('n2:=a(n3,n4);s5:="PROCDEFPROCDEF ";h;i(T)t{h}e{h}')
-runner('', 'test_cases/t7')
+if __name__ == '__main__':
+    runner()
