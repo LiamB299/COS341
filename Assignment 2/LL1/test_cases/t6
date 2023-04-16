@@ -1,0 +1,58 @@
+h,
+p100{
+    g n 110
+    *comment set  1 *
+},
+p200 {
+    o n 210
+    *comment set  21*
+    ;
+    r s 220
+    *comment set  22*
+
+},
+p300 {
+    n310 := a(
+                m(n320,n330),
+                d(n340,n350)
+             )
+    *comment set  30*
+    ;
+    n360:=n370;
+    n380:=0.00;
+    n390:=-20.00;
+    n391:=4.00
+    *comment set  31*
+
+},p302{
+    b310 := b320;
+    b330 := T;
+    b340 := F;
+    b350 := ^(v(!(b361),b311),E(n312,n323))
+        *comment set  30*
+    ;
+    s301 := "stringvalue set"
+},
+p400 {
+    c p 400
+    *comment set  4 *
+},
+p500 {
+    w(>(n310,n340)){
+        gn310
+        *loop comment 01*
+        ;
+        s501 := "stringvalue 500"
+    }
+    *comment set  5 *
+},
+p600 {
+    i(^(b601,b602))t{s603:="then assign mee"}e{s604:="else assign mee";b350 := ^(v(!(b361),b311),E(n312,n323)) *comment set  30*;w(>(n310,n340)){
+        gn310
+        *loop comment 01*
+        ;
+        s501 := "stringvalue 500"
+    }
+    *comment set  5 *}
+    *comment set  6 *
+}

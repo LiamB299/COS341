@@ -5,6 +5,7 @@ from LL1_table import *
 import re
 from render_tree import *
 import os
+from output import write_to_xml
 
 def peak(stack: []):
     if len(stack) == 0:
@@ -235,10 +236,12 @@ def runner(expression= '', file=''):
     vertices = []
     edges = []
     traverse_tree(match_table, vertices, edges)
-    return render_graph(vertices, edges)
+    render_graph(vertices, edges)
+    write_to_xml(match_table)
+    return
 
 
 # runner("n26:=a(n36,n49)")
 # runner('n2:=a(n3,n4);s5:="PROCDEFPROCDEF ";h')
 # runner('n2:=a(n3,n4);s5:="PROCDEFPROCDEF ";h;i(T)t{h}e{h}')
-# runner('', 'test_cases/t5')
+runner('', 'test_cases/t7')
