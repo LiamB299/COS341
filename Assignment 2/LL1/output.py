@@ -8,6 +8,8 @@ def traverse_tree(current_node: NT_node | T_node, file, indents):
             return
 
         ids = ''
+
+        current_node.children.reverse()
         for child in current_node.children:
             ids += str(child.id) + ','
         ids = ids[:len(ids) - 1]
