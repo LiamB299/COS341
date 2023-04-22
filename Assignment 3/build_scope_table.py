@@ -157,11 +157,33 @@ def find_procs(root_key: str, tree: {}, proc_table: ProcedureTable, parent_id=0)
                     find_procs(sub_contents[0], item, proc_table, parent_id)
 
 
+def validate_proc_call(sub_tree: {}, proc_table: ProcedureTable, parent_id=0):
+    var = 'p'
+    variable = sub_tree['DIGITS']
+
+    while 'MORE' in variable:
+        var += variable['D']['terminal']['#text']
+        variable = variable['MORE']['DIGITS']
+    var += variable['D']['terminal']['#text']
+
+    # siblings calling each other
+    # parent calling children
+    proc_id = proc_table.find_proc(parent_id, var)
+    if proc_id < 0:
+        proc_table.add_error(parent_id, var, f'The procedure {var} has no corresponding declaration in this scope: {parent_id}')
+        return
+    else:
+        proc_table.set_called(proc_id)
+
+    return 0
+
+
 def find_calls(root_key: str, tree: {}, proc_table: ProcedureTable, parent_id=0):
-    if root_key in ['CALL']:
-        build_defined_proc(tree, proc_table, parent_id)
+    if root_key in ['PROC']:
         parent_id = tree['@id']
-        find_calls('PROGR', tree['PROGR'], proc_table, parent_id)
+
+    if root_key in ['CALL']:
+        validate_proc_call(tree, proc_table, parent_id)
         return
 
     contents = tree.items()
@@ -192,7 +214,7 @@ def runner():
     find_procs(list(ast_tree.keys())[0], ast_tree, proc_table, 0)
 
     # pass 4: check calls are valid
-
+    find_calls(list(ast_tree.keys())[0], ast_tree, proc_table, 0)
 
     proc_table.print()
 

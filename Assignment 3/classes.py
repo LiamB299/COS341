@@ -49,7 +49,6 @@ class Procedure:
         self.label = label
         self.id = id
         self.parent_scope = parent_scope
-        self.error_infos = []
         self.called = False
 
     def print(self):
@@ -57,7 +56,6 @@ class Procedure:
             self.label,
             self.id,
             self.parent_scope,
-            '',
             self.called
         ]
 
@@ -70,24 +68,44 @@ class ProcedureTable:
     def add_proc(self, proc: Procedure):
         comp_proc: Procedure
         for comp_proc in self.procs:
-            if comp_proc.label == proc.label:
-                if comp_proc.parent_scope == proc.parent_scope:
+            if comp_proc.label == proc.label and comp_proc.parent_scope == proc.parent_scope:
                     comp_proc.error_infos.append(f"{comp_proc.id} naming conflict with {proc.id}")
                     proc.error_infos.append(f"{proc.id} naming conflict with {comp_proc.id}")
         self.procs.append(proc)
 
-    def find_proc(self, scope, id):
+    def set_called(self, id):
         for proc in self.procs:
-            if proc.parent_scope == scope and proc.id == id:
-                return True
-        return False
+            if proc.id == id:
+                proc.called = True
+
+    def find_parent_scope(self, parent_scope, label):
+        for proc in self.procs:
+            if proc.id == int(parent_scope):
+                for outer_proc in self.procs:
+                    if outer_proc.parent_scope == proc.parent_scope and outer_proc.label == label:
+                        return outer_proc.id
+        return -1
+
+    def find_proc(self, scope, label):
+        # check current scope
+        for proc in self.procs:
+            if proc.parent_scope == scope and proc.label == label:
+                return proc.id
+
+        # get parent and check procs in their scope for siblings call
+        return self.find_parent_scope(scope, label)
+
+    def add_error(self, scope, label, message):
+        for proc in self.procs:
+            if proc.parent_scope == scope and proc.label == label:
+                proc.error_infos.append(message)
 
     def print(self):
         data = []
         for proc in self.procs:
             data.append(proc.print())
 
-        headings = ['Label', 'ID', 'Scope ID', 'Errors', 'Is Called']
+        headings = ['Label', 'ID', 'Scope ID', 'Is Called']
 
         table = tabulate.tabulate(data, headings)
         print(table)
