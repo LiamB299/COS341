@@ -3,7 +3,7 @@ from classes import *
 from definitions import non_terminals
 
 
-def build_assigned_var(sub_tree: {}, varTable: VariableTable):
+def build_assigned_var(sub_tree: {}, var_table: VariableTable):
     var = ''
     expression: {}
     var_id = -1
@@ -28,32 +28,14 @@ def build_assigned_var(sub_tree: {}, varTable: VariableTable):
         variable = variable['MORE']['DIGITS']
     var += variable['D']['terminal']['#text']
 
-    varTable.add_var(Variable(var, var_id, "", -1, True))
+    var_table.add_var(Variable(var, var_id, "", 0, True))
 
     return 0
 
 
-# def find_variables(tree: {}, variables: [], parent_id=0):
-#     root_key = tree.keys()
-#
-#     for key, contents in tree.items():
-#         if key == 'PROC':
-#             parent_id = int(contents['@id'])
-#
-#         if key in ['NUMVAR', 'BOOLVAR', 'STRINGV']:
-#             build_var(tree, variables, parent_id)
-#             continue
-#         if not isinstance(contents, dict):
-#             continue
-#         else:
-#             for sub_keys, sub_contents in contents.items():
-#                 if isinstance(sub_contents, dict):
-#                     find_variables(contents[sub_keys], variables, parent_id)
-
-
-def find_defined_variables(root_key: str, tree: {}, varTable: VariableTable, parent_id=0):
+def find_defined_variables(root_key: str, tree: {}, var_table: VariableTable, parent_id=0):
     if root_key in ['ASSIGN']:
-        build_assigned_var(tree, varTable)
+        build_assigned_var(tree, var_table)
         return
 
     contents = tree.items()
@@ -62,13 +44,13 @@ def find_defined_variables(root_key: str, tree: {}, varTable: VariableTable, par
             continue
         else:
             if isinstance(sub_contents[1], dict):
-                find_defined_variables(sub_contents[0], sub_contents[1], varTable, parent_id)
+                find_defined_variables(sub_contents[0], sub_contents[1], var_table, parent_id)
             else:
                 for item in sub_contents[1]:
-                    find_defined_variables(sub_contents[0], item, varTable, parent_id)
+                    find_defined_variables(sub_contents[0], item, var_table, parent_id)
 
 
-def build_referenced_var(sub_tree: {}, varTable: VariableTable):
+def build_referenced_var(sub_tree: {}, var_table: VariableTable):
     var = ''
     var_id = -1
     if 'BOOLVAR' in sub_tree:
@@ -89,26 +71,26 @@ def build_referenced_var(sub_tree: {}, varTable: VariableTable):
         variable = variable['MORE']['DIGITS']
     var += variable['D']['terminal']['#text']
 
-    varTable.add_var(Variable(var, var_id, "", -1, False))
+    var_table.add_var(Variable(var, var_id, "", 0, False))
 
     return 0
 
 
-def find_referenced_variables(root_key: str, tree: {}, varTable: VariableTable, parent_id=0):
+def find_referenced_variables(root_key: str, tree: {}, var_table: VariableTable, parent_id=0):
     if root_key in ['ASSIGN']:
         if 'BOOLVAR' in tree:
-            find_referenced_variables('BOOLEXPR', tree['BOOLEXPR'], varTable, parent_id)
+            find_referenced_variables('BOOLEXPR', tree['BOOLEXPR'], var_table, parent_id)
         elif 'STRINGV' in tree:
-            find_referenced_variables('STRI', tree['STRI'], varTable, parent_id)
+            find_referenced_variables('STRI', tree['STRI'], var_table, parent_id)
         else:
-            find_referenced_variables('NUMEXPR', tree['NUMEXPR'], varTable, parent_id)
+            find_referenced_variables('NUMEXPR', tree['NUMEXPR'], var_table, parent_id)
         return
 
     if root_key in ['LOGIC']:
         a = 1
 
     if root_key in ['NUMVAR', 'BOOLVAR', 'STRINGV']:
-        build_referenced_var({root_key: tree}, varTable)
+        build_referenced_var({root_key: tree}, var_table)
         return
 
     contents = tree.items()
@@ -117,10 +99,10 @@ def find_referenced_variables(root_key: str, tree: {}, varTable: VariableTable, 
             continue
         else:
             if isinstance(sub_contents[1], dict):
-                find_referenced_variables(sub_contents[0], sub_contents[1], varTable, parent_id)
+                find_referenced_variables(sub_contents[0], sub_contents[1], var_table, parent_id)
             else:
                 for item in sub_contents[1]:
-                    find_referenced_variables(sub_contents[0], item, varTable, parent_id)
+                    find_referenced_variables(sub_contents[0], item, var_table, parent_id)
 
 
 def build_defined_proc(sub_tree: {}, proc_table: ProcedureTable, parent_id):
@@ -169,6 +151,7 @@ def validate_proc_call(sub_tree: {}, proc_table: ProcedureTable, parent_id=0):
     # siblings calling each other
     # parent calling children
     proc_id = proc_table.find_proc(parent_id, var)
+    proc_table.is_parent_scope(parent_id, var)
     if proc_id < 0:
         proc_table.add_error(parent_id, var, f'The procedure {var} has no corresponding declaration in this scope: {parent_id}')
         return
@@ -200,14 +183,14 @@ def find_calls(root_key: str, tree: {}, proc_table: ProcedureTable, parent_id=0)
 
 def runner():
     ast_tree = read_tree()
-    varTable = VariableTable()
+    var_table = VariableTable()
 
     # pass 1: define vars
-    find_defined_variables(list(ast_tree.keys())[0], ast_tree.copy(), varTable, 0)
+    find_defined_variables(list(ast_tree.keys())[0], ast_tree.copy(), var_table, 0)
 
     # pass 2: check vars in expressions, call logic error if not defined
-    find_referenced_variables(list(ast_tree.keys())[0], ast_tree, varTable, 0)
-    varTable.print()
+    find_referenced_variables(list(ast_tree.keys())[0], ast_tree, var_table, 0)
+    var_table.print()
 
     # pass 3: build procs and scopes
     proc_table = ProcedureTable()

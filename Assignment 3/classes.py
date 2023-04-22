@@ -47,7 +47,9 @@ class Procedure:
 
     def __init__(self, label, id, parent_scope):
         self.label = label
+        self.id: int
         self.id = id
+        self.parent_scope: int
         self.parent_scope = parent_scope
         self.called = False
 
@@ -69,24 +71,31 @@ class ProcedureTable:
         comp_proc: Procedure
         for comp_proc in self.procs:
             if comp_proc.label == proc.label and comp_proc.parent_scope == proc.parent_scope:
-                    comp_proc.error_infos.append(f"{comp_proc.id} naming conflict with {proc.id}")
-                    proc.error_infos.append(f"{proc.id} naming conflict with {comp_proc.id}")
+                raise Exception(f"{comp_proc.id} naming conflict with {proc.id}")
+            if self.find_parent_scope(proc.parent_scope, proc.label) >= 0:
+                raise Exception(f"{comp_proc.id} naming conflict with {proc.id}")
+
         self.procs.append(proc)
 
-    def set_called(self, id):
+    def set_called(self, id: int):
         for proc in self.procs:
             if proc.id == id:
                 proc.called = True
 
-    def find_parent_scope(self, parent_scope, label):
+    def find_parent_scope(self, parent_scope: int, label):
         for proc in self.procs:
-            if proc.id == int(parent_scope):
+            if proc.id == parent_scope:
                 for outer_proc in self.procs:
                     if outer_proc.parent_scope == proc.parent_scope and outer_proc.label == label:
                         return outer_proc.id
         return -1
 
-    def find_proc(self, scope, label):
+    def is_parent_scope(self, scope: int, label):
+        for proc in self.procs:
+            if proc.id == int(scope) and proc.label == label:
+                raise Exception('Calling Parent Procedure')
+
+    def find_proc(self, scope: int, label):
         # check current scope
         for proc in self.procs:
             if proc.parent_scope == scope and proc.label == label:
@@ -95,7 +104,7 @@ class ProcedureTable:
         # get parent and check procs in their scope for siblings call
         return self.find_parent_scope(scope, label)
 
-    def add_error(self, scope, label, message):
+    def add_error(self, scope: int, label, message):
         for proc in self.procs:
             if proc.parent_scope == scope and proc.label == label:
                 proc.error_infos.append(message)

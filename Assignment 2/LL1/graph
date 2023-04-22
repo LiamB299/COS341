@@ -192,10 +192,6 @@ digraph {
 	CALL
 	DIGITS
 	MORE
-	DIGITS
-	MORE
-	D
-	5
 	D
 	1
 	cp
@@ -759,11 +755,7 @@ digraph {
 	CALL -> cp
 	DIGITS -> MORE
 	DIGITS -> D
-	MORE -> DIGITS
-	DIGITS -> MORE
-	DIGITS -> D
 	MORE -> "ε"
-	D -> 5
 	D -> 1
 	KOMMENT -> "ε"
 	INSTR -> ASSIGN
