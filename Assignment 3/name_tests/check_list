@@ -1,0 +1,7 @@
+t1 - two siblings
+t2 - two siblings, p1 has child with same name as sibling -- error
+t3 - two siblings, p2 child same name as parent -- error
+t4 - three siblings
+t5 - reorder of t2 -- error
+t6 - siblings have children with the same name
+t7 - nested sibling child same name - error

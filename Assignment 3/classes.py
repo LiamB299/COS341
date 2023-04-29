@@ -127,7 +127,7 @@ class ProcedureTable:
                 return proc.id
 
         # get parent and check procs in their scope for siblings call
-        return self.find_parent_scope(scope, label)
+        return self.find_parent_scope(int(scope), label)
 
     def add_error(self, scope: int, label, message):
         for proc in self.procs:

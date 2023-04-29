@@ -152,10 +152,10 @@ def validate_proc_call(sub_tree: {}, proc_table: ProcedureTable, parent_id=0):
 
     # siblings calling each other
     # parent calling children
-    proc_id = proc_table.find_proc(parent_id, var)
-    proc_table.is_parent_scope(parent_id, var)
+    proc_id = proc_table.find_proc(int(parent_id), var)
+    # proc_table.is_parent_scope(int(parent_id), var)
     if proc_id < 0:
-        raise Exception(parent_id, var, f'The procedure {var} has no corresponding declaration in this scope: {parent_id}')
+        raise Exception(int(parent_id), var, f'The procedure {var} has no corresponding declaration in this scope: {int(parent_id)}')
     else:
         proc_table.set_called(proc_id)
 
@@ -184,7 +184,7 @@ def find_calls(root_key: str, tree: {}, proc_table: ProcedureTable, parent_id=0)
 
 def runner():
     try:
-        parser("", 'test_cases/t7')
+        parser("", 'call_tests/t9')
 
         ast_tree = read_tree()
         var_table = VariableTable()
