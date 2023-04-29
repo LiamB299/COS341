@@ -42,15 +42,24 @@ class VariableTable:
         print(tabulate.tabulate(data, headings))
         print()
 
+    def print_html(self):
+        data = []
+        for var in self.variables:
+            data.append(var.print())
+
+        headings = ['Label', 'ID', 'Scope', 'Is defined']
+
+        table = tabulate.tabulate(data, headings, tablefmt='html')
+
+        return table
+
 
 class Procedure:
 
     def __init__(self, label, id, parent_scope):
         self.label = label
-        self.id: int
-        self.id = id
-        self.parent_scope: int
-        self.parent_scope = parent_scope
+        self.id = int(id)
+        self.parent_scope = int(parent_scope)
         self.called = False
 
     def print(self):
@@ -70,12 +79,28 @@ class ProcedureTable:
     def add_proc(self, proc: Procedure):
         comp_proc: Procedure
         for comp_proc in self.procs:
+            # same name, same scope
             if comp_proc.label == proc.label and comp_proc.parent_scope == proc.parent_scope:
-                raise Exception(f"{comp_proc.id} naming conflict with {proc.id}")
+                raise Exception(f"ID: {comp_proc.id} naming conflict with ID: {proc.id}")
+
+            # same name, parent has sibling with name
             if self.find_parent_scope(proc.parent_scope, proc.label) >= 0:
-                raise Exception(f"{comp_proc.id} naming conflict with {proc.id}")
+                raise Exception(f"ID: {comp_proc.id} naming conflict with ID: {proc.id}")
+
+            # child is defined first, parent has sibling with same name
+            if self.compare_to_children(proc.label, proc.parent_scope) >= 0:
+                raise Exception(f"ID: {comp_proc.id} naming conflict with ID: {proc.id}")
 
         self.procs.append(proc)
+
+    def compare_to_children(self, label_to_compare: int, scope: int):
+        for proc in self.procs:
+            if proc.parent_scope == scope:
+                proc_child: Procedure
+                for proc_child in self.procs:
+                    if proc_child.parent_scope == proc.id and proc_child.label == label_to_compare:
+                        return proc_child.id
+        return -1
 
     def set_called(self, id: int):
         for proc in self.procs:
@@ -119,3 +144,15 @@ class ProcedureTable:
         table = tabulate.tabulate(data, headings)
         print(table)
         print('\n')
+
+    def print_html(self):
+        data = []
+        for proc in self.procs:
+            data.append(proc.print())
+
+        headings = ['Label', 'ID', 'Scope ID', 'Is Called']
+
+        table = tabulate.tabulate(data, headings, tablefmt='html')
+
+        return table
+

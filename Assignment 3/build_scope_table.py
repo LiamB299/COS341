@@ -1,6 +1,8 @@
 from parse_xml import read_tree
 from classes import *
 from definitions import non_terminals
+from LL1.LL1_parse import runner as parser
+from html_writer import HtmlWriter
 
 
 def build_assigned_var(sub_tree: {}, var_table: VariableTable):
@@ -153,8 +155,7 @@ def validate_proc_call(sub_tree: {}, proc_table: ProcedureTable, parent_id=0):
     proc_id = proc_table.find_proc(parent_id, var)
     proc_table.is_parent_scope(parent_id, var)
     if proc_id < 0:
-        proc_table.add_error(parent_id, var, f'The procedure {var} has no corresponding declaration in this scope: {parent_id}')
-        return
+        raise Exception(parent_id, var, f'The procedure {var} has no corresponding declaration in this scope: {parent_id}')
     else:
         proc_table.set_called(proc_id)
 
@@ -182,25 +183,34 @@ def find_calls(root_key: str, tree: {}, proc_table: ProcedureTable, parent_id=0)
 
 
 def runner():
-    ast_tree = read_tree()
-    var_table = VariableTable()
+    try:
+        parser("", 'test_cases/t7')
 
-    # pass 1: define vars
-    find_defined_variables(list(ast_tree.keys())[0], ast_tree.copy(), var_table, 0)
+        ast_tree = read_tree()
+        var_table = VariableTable()
 
-    # pass 2: check vars in expressions, call logic error if not defined
-    find_referenced_variables(list(ast_tree.keys())[0], ast_tree, var_table, 0)
-    var_table.print()
+        # pass 1: define vars
+        find_defined_variables(list(ast_tree.keys())[0], ast_tree.copy(), var_table, 0)
 
-    # pass 3: build procs and scopes
-    proc_table = ProcedureTable()
-    find_procs(list(ast_tree.keys())[0], ast_tree, proc_table, 0)
+        # pass 2: check vars in expressions, call logic error if not defined
+        find_referenced_variables(list(ast_tree.keys())[0], ast_tree, var_table, 0)
+        var_table.print()
 
-    # pass 4: check calls are valid
-    find_calls(list(ast_tree.keys())[0], ast_tree, proc_table, 0)
+        # pass 3: build procs and scopes
+        proc_table = ProcedureTable()
+        find_procs(list(ast_tree.keys())[0], ast_tree, proc_table, 0)
 
-    proc_table.print()
+        # pass 4: check calls are valid
+        find_calls(list(ast_tree.keys())[0], ast_tree, proc_table, 0)
 
+        # proc_table.print()
+
+        writer = HtmlWriter()
+        writer.write_vars(var_table)
+        writer.write_procs(proc_table)
+    except Exception as e:
+        print('ERROR:\n')
+        print(e)
 
     return 0
 

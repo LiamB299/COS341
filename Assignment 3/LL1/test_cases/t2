@@ -1,0 +1,36 @@
+b1:=T;
+b2:=F;
+n23:=1.12;
+
+w(v(b1,b2))
+{
+    o n23;
+    n23:=a(n23,3.00) *Add 3 to  n23  *;
+    i(>(n23,20.00))
+    t{
+        b1:=F
+    }
+};
+c p1234 *Calling  proc23*
+,
+p1234{
+    n232:=12334543.01 *int declaration*;
+    n78:=23452.75;
+    n22:=a(n232,n78) *addition operat*;
+    n23:=m(n22,n78) *multiplication *;
+    b1:=T;
+    b2:=F;
+    b3:=E(n22,n23);
+
+    i(b3)
+    t{
+        s5:="The vars are ==";
+        r s5;
+        o n23
+    }
+    e{
+        s6:="The vars are !=";
+        r s6
+    }
+
+}
