@@ -5,3 +5,5 @@ t4 - three siblings
 t5 - reorder of t2 -- error
 t6 - siblings have children with the same name
 t7 - nested sibling child same name - error
+t8 - siblings with same name -- error
+t9 - parent and child with same name -- error

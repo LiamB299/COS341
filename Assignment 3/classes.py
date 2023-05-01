@@ -63,6 +63,10 @@ class Procedure:
         self.called = False
 
     def print(self):
+        if not self.called:
+            print(f"WARNING: The procedure {self.label} is not called from anywhere within the scope to which it "
+                  f"belongs!")
+
         return [
             self.label,
             self.id,

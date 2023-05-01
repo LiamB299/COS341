@@ -39,9 +39,9 @@ td {
         self.file.write("<h1>Procedures</h1>")
         self.file.write(procs.print_html())
 
-    def write_errors(self, errors):
-        self.file.write("<h1>Errors</h1>")
-        self.file.write(procs.print_html())
+    # def write_errors(self, errors):
+    #     self.file.write("<h1>Errors</h1>")
+    #     self.file.write(procs.print_html())
 
     def __del__(self):
         self.file.write("""

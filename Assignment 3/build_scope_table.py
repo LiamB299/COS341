@@ -184,7 +184,7 @@ def find_calls(root_key: str, tree: {}, proc_table: ProcedureTable, parent_id=0)
 
 def runner():
     try:
-        parser("", 'call_tests/t9')
+        parser("", '')
 
         ast_tree = read_tree()
         var_table = VariableTable()
@@ -194,7 +194,7 @@ def runner():
 
         # pass 2: check vars in expressions, call logic error if not defined
         find_referenced_variables(list(ast_tree.keys())[0], ast_tree, var_table, 0)
-        var_table.print()
+        # var_table.print()
 
         # pass 3: build procs and scopes
         proc_table = ProcedureTable()
@@ -211,6 +211,7 @@ def runner():
     except Exception as e:
         print('ERROR:\n')
         print(e)
+        input('')
 
     return 0
 
