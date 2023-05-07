@@ -1,8 +1,8 @@
-from parse_xml import read_tree
-from classes import *
-from definitions import non_terminals
+from Scopes.parse_xml import read_tree
+from Scopes.classes import *
+from Scopes.definitions import non_terminals
 from LL1.LL1_parse import runner as parser
-from html_writer import HtmlWriter
+from Scopes.html_writer import HtmlWriter
 
 
 def build_assigned_var(sub_tree: {}, var_table: VariableTable):
@@ -182,9 +182,9 @@ def find_calls(root_key: str, tree: {}, proc_table: ProcedureTable, parent_id=0)
                     find_calls(sub_contents[0], item, proc_table, parent_id)
 
 
-def runner():
+def runner(filename: str):
     try:
-        parser("", '')
+        parser(file=filename)
 
         ast_tree = read_tree()
         var_table = VariableTable()
@@ -207,18 +207,13 @@ def runner():
 
         # proc_table.print()
 
-        writer = HtmlWriter()
-        writer.write_vars(var_table)
-        writer.write_procs(proc_table)
-        print('Tables written to output.html...')
-        input()
+        # writer = HtmlWriter()
+        # writer.write_vars(var_table)
+        # writer.write_procs(proc_table)
+        # print('Tables written to output.html...')
+        # input()
+
+        return var_table, proc_table
     except Exception as e:
         print('ERROR:\n')
         print(e)
-        input()
-
-    return 0
-
-
-if __name__ == '__main__':
-    runner()

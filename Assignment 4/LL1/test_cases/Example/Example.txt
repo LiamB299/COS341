@@ -1,0 +1,25 @@
+n1 := 1.23;
+s2 := "whuipsjeituysge";
+b3 := T
+*jsowiowpriwmcns*;
+
+i(^(b3, T)) t
+{
+  n1 := a(n1, -2.90)
+}
+e
+{
+  o n1
+};
+
+w(>(n1, 1.00))
+{
+  n1 := m(n1, n1)
+};
+
+h,
+
+p1
+{
+  n1 := 1.00
+}
