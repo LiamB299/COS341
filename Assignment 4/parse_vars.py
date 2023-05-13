@@ -1,12 +1,14 @@
 from Scopes.build_scope_table import runner as build_scope
 import reparse_xml as parser
 from Scopes.definitions import non_terminals
-from Scopes.classes import VariableTable
+from Scopes.classes import VariableTable, ProcedureTable
 import copy
 import array
 
 ast_tree: dict | None
 ast_tree = None
+proc_table = ProcedureTable | None
+proc_list = []
 
 
 def prune_tree(tree: dict, key: str, skip_list):
@@ -49,6 +51,22 @@ def prune_tree(tree: dict, key: str, skip_list):
     return tree
 
 
+def build_proc_list(tree: dict, current_node: str):
+    if current_node == 'PROC':
+        proc_list.append(tree)
+    else:
+        contents = tree.copy().items()
+        for sub_contents in list(contents):
+            if not sub_contents[0] in non_terminals:
+                continue
+            else:
+                if isinstance(sub_contents[1], dict):
+                    build_proc_list(sub_contents[1], sub_contents[0])
+                else:
+                    for item in sub_contents[1]:
+                        build_proc_list(item, sub_contents[0])
+
+
 # expects algo statements
 def find_halt(tree: dict):
     if 'terminal' in tree['INSTR'] and tree['INSTR']['terminal']['value'] == 'h':
@@ -61,9 +79,9 @@ def find_halt(tree: dict):
 
 
 ############################################################################
-
-
-def parse_vars(tree: dict, current_node: str, var_table: VariableTable, allow_procs=False):
+def parse_vars(tree: dict, current_node: str, var_table: VariableTable, allow_procs=False, scope=0):
+    if current_node == 'PROC':
+        scope = tree['id']
     if current_node == 'ALGO':
         if 'SEQ' in tree and 'SEQ' in tree['SEQ'] and has_if(tree['SEQ']['ALGO']):
             if validate_boolexpr(tree['SEQ']['ALGO']['INSTR']['BRANCH']['BOOLEXPR'], var_table):
@@ -73,9 +91,9 @@ def parse_vars(tree: dict, current_node: str, var_table: VariableTable, allow_pr
                 # Rule 28 - only then
                 table_1 = copy.copy(var_table)
                 # parse if
-                parse_vars(tree['SEQ']['ALGO']['INSTR'], 'INSTR', table_1)
+                parse_vars(tree['SEQ']['ALGO']['INSTR'], 'INSTR', table_1, scope=scope)
                 # parse below if
-                parse_vars(tree['SEQ']['SEQ'], 'SEQ', var_table)
+                parse_vars(tree['SEQ']['SEQ'], 'SEQ', var_table, scope=scope)
                 var_table.merge_tables(table_1.get_vars())
             else:
                 # Rule 29 - then / else -- get matching vars and then split and parse
@@ -83,15 +101,15 @@ def parse_vars(tree: dict, current_node: str, var_table: VariableTable, allow_pr
                 table_2 = copy.copy(var_table)
 
                 # parse then
-                parse_vars(tree['SEQ']['ALGO']['INSTR']['BRANCH']['ALGO'], 'ALGO', table_1)
+                parse_vars(tree['SEQ']['ALGO']['INSTR']['BRANCH']['ALGO'], 'ALGO', table_1, scope=scope)
                 # parse else
-                parse_vars(tree['SEQ']['ALGO']['INSTR']['BRANCH']['ELSE']['ALGO'], 'ALGO', table_2)
+                parse_vars(tree['SEQ']['ALGO']['INSTR']['BRANCH']['ELSE']['ALGO'], 'ALGO', table_2, scope=scope)
 
                 # match diff
                 new_table = var_table.merge_diff(table_1.get_vars(), table_2.get_vars())
 
                 # parse below if
-                parse_vars(tree['SEQ']['SEQ'], 'SEQ', var_table.set_table(new_table))
+                parse_vars(tree['SEQ']['SEQ'], 'SEQ', var_table.set_table(new_table), scope=scope)
 
                 var_table.merge_tables(table_1)
                 var_table.merge_tables(table_2)
@@ -103,30 +121,31 @@ def parse_vars(tree: dict, current_node: str, var_table: VariableTable, allow_pr
             # Rule 27 - while split and rebuild table
             table_1 = copy.copy(var_table)
             # parse while
-            parse_vars(tree['SEQ']['ALGO']['INSTR']['LOOP']['ALGO'], 'ALGO', table_1)
+            parse_vars(tree['SEQ']['ALGO']['INSTR']['LOOP']['ALGO'], 'ALGO', table_1, scope=scope)
             # parse after
-            parse_vars(tree['SEQ']['SEQ'], 'SEQ', var_table)
+            parse_vars(tree['SEQ']['SEQ'], 'SEQ', var_table, scope=scope)
             var_table.merge_tables(table_1)
             return
 
         if 'CALL' in tree['INSTR']:
             # TODO later due to complexity
-            # name = f"p{build_call_name(tree['INSTR']['CALL']['DIGITS'])}"
-            # parse_call(name, var_table)
+            name = f"p{build_call_name(tree['INSTR']['CALL']['DIGITS'])}"
+            parse_call(name, var_table, scope)
+            parse_vars(tree['SEQ']['SEQ'], 'SEQ', var_table, scope=scope)
             return
 
     ##########################################################################
     # Rules 22,23
     if current_node == 'LOOP':
         validate_boolexpr(tree['BOOLEXPR'], var_table)
-        parse_vars(tree['ALGO'], 'ALGO', var_table)
+        parse_vars(tree['ALGO'], 'ALGO', var_table, scope=scope)
         return
 
     if current_node == 'BRANCH':
         validate_boolexpr(tree['BOOLEXPR'], var_table)
-        parse_vars(tree['ALGO'], 'ALGO', var_table)
+        parse_vars(tree['ALGO'], 'ALGO', var_table, scope=scope)
         if 'ELSE' in tree:
-            parse_vars(tree['ELSE'], 'ELSE', var_table)
+            parse_vars(tree['ELSE'], 'ELSE', var_table, scope=scope)
         return
 
     ##########################################################################
@@ -185,10 +204,21 @@ def parse_vars(tree: dict, current_node: str, var_table: VariableTable, allow_pr
             continue
         else:
             if isinstance(sub_contents[1], dict):
-                parse_vars(sub_contents[1], sub_contents[0], var_table)
+                parse_vars(sub_contents[1], sub_contents[0], var_table, scope=scope)
             else:
                 for item in sub_contents[1]:
-                    parse_vars(item, sub_contents[0], var_table)
+                    parse_vars(item, sub_contents[0], var_table, scope=scope)
+
+
+def parse_call(name: str, var_table: VariableTable, scope: int):
+    global proc_table
+    global proc_list
+    # find proc
+    id, proc_scope = proc_table.find_proc(name, scope)
+    for proc in proc_list:
+        if proc['id'] == id:
+            parse_vars(proc['PROGR'], 'PROGR', var_table, False, proc_scope)
+            return
 
 
 def has_if(tree: dict):
@@ -264,6 +294,7 @@ def build_call_name(tree: dict):
 
 def runner():
     global ast_tree
+    global proc_table
 
     var_table, proc_table = build_scope(filename='test_cases/t1')
     ast_tree = parser.read_tree('output.xml')
@@ -272,9 +303,14 @@ def runner():
     skip_list = []
     ast_tree = prune_tree(ast_tree, 'PROGR', skip_list)
 
+    # Build Proc list
+    build_proc_list(ast_tree, 'PROGR')
+
     # Parse for vars
 
-    return print(proc_table)
+    # Print HTML
+
+    return 0
 
 
 if __name__ == '__main__':

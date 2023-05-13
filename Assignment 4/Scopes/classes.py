@@ -51,11 +51,10 @@ class VariableTable:
                     break
             self.variables.append(var1)
 
-
     def get_vars(self):
         return self.variables
 
-    def set_table(self, table:[]):
+    def set_table(self, table: []):
         self.variables = table
 
     def merge_diff(self, table1: [], table2: []):
@@ -140,6 +139,20 @@ class ProcedureTable:
 
     def __init__(self):
         self.procs = []
+
+    def find_proc(self, name: str, scope: int):
+        scope = int(scope)
+        sibling_proc: Procedure
+        for proc in self.procs:
+            if proc.label == name:
+                # calling child
+                if proc.parent_scope == scope:
+                    return proc.id, scope
+                else:
+                    for sibling_proc in self.procs:
+                        if sibling_proc.id == scope and sibling_proc.parent_scope == proc.parent_scope:
+                            return proc.id, proc.parent_scope
+        raise Exception('Debug: Proc not found...')
 
     def add_proc(self, proc: Procedure):
         comp_proc: Procedure
