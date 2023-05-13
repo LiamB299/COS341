@@ -5,7 +5,7 @@ class Variable:
     def __init__(self, label, id, expression, scope, defined):
         self.label = label
         self.id = id
-        self.expression = expression
+        self.expression = None
         self.scope = scope
         self.defined = defined
 
@@ -16,6 +16,16 @@ class Variable:
             self.scope,
             self.defined
         ]
+
+    def get_name_id(self):
+        return self.label, self.id
+
+    def is_defined(self):
+        return self.defined
+
+
+class VariableTable:
+    pass
 
 
 class VariableTable:
@@ -30,6 +40,35 @@ class VariableTable:
     #         for var in self.variables:
     #             if other_var.label == var.label
     #                 raise Exception('This var was defined ')
+    def merge_tables(self, other: []):
+        var1: Variable
+        var2: Variable
+        for var1 in other:
+            name1, id1 = var1.get_name_id()
+            for var2 in self.variables:
+                name2, id2 = var2.get_name_id()
+                if name1 == name2 and id1 == id2:
+                    break
+            self.variables.append(var1)
+
+
+    def get_vars(self):
+        return self.variables
+
+    def set_table(self, table:[]):
+        self.variables = table
+
+    def merge_diff(self, table1: [], table2: []):
+        new_table = []
+        var1: Variable
+        var2: Variable
+        for var1 in table1:
+            name1, id1 = var1.get_name_id()
+            for var2 in table2:
+                name2, id2 = var2.get_name_id()
+                if name1 == name2 and id1 == id2:
+                    new_table.append(Variable(name1, id1, 0, '', var1.is_defined() and var2.is_defined()))
+        return new_table
 
     def add_var(self, var: Variable):
         comp_var: Variable
@@ -39,6 +78,20 @@ class VariableTable:
                     comp_var.expression = var.expression
                 return
         self.variables.append(var)
+
+    def init_var(self, name: str, id: int):
+        for var in self.variables:
+            if var.label == name:
+                var.defined = True
+                return
+        self.variables.append(Variable(name, id, '', 0, True))
+
+    def is_defined(self, name: str, id: int):
+        id = int(id)
+        for var in self.variables:
+            if var.label == name and var.id == id:
+                return var.defined
+        return False
 
     def print(self):
         data = []
@@ -167,4 +220,3 @@ class ProcedureTable:
         table = tabulate.tabulate(data, headings, tablefmt='html')
 
         return table
-
