@@ -1,0 +1,4 @@
+n1:=0.00;
+o n1;
+s1:="aaaaaaaaaaaaaaa";
+r s1

@@ -1,0 +1,11 @@
+s1:="Hellooooooooooo";
+n1:=12345.00;
+b1:=T;
+s2:="Hellooooooooooo";
+n2:=n1;
+b2:=b1;
+b1:=b2;
+n1:=n2;
+r s1;
+r s2;
+h
