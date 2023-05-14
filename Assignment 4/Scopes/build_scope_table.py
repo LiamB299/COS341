@@ -189,7 +189,7 @@ def runner(filename: str):
         ast_tree = read_tree()
         var_table = VariableTable()
 
-        print('Find Vars...')
+        #print('Find Vars...')
         # pass 1: define vars
         find_defined_variables(list(ast_tree.keys())[0], ast_tree.copy(), var_table, 0)
 
@@ -216,4 +216,5 @@ def runner(filename: str):
         return var_table, proc_table
     except Exception as e:
         print('ERROR:\n')
-        print(e)
+        raise e
+

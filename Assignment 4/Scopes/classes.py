@@ -10,6 +10,7 @@ class Variable:
         self.defined = defined
 
     def print(self):
+        self.scope = 0
         return [
             self.label,
             self.id,
