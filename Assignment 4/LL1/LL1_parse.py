@@ -118,6 +118,14 @@ def check_floats(expression):
     return expression
 
 
+def clean_special(expression: str):
+    expr = ''
+    for char in expression:
+        if char not in ['\t', '\n']:
+            expr += char
+    return expr
+
+
 # build with: python -m PyInstaller runner.py
 def parse_LL1_grammar(express: str, parse_table):
     stack: [NT_node | T_node] = []
@@ -126,6 +134,7 @@ def parse_LL1_grammar(express: str, parse_table):
     # push start non-terminal onto stack
     stack.append(NT_node(non_terminals[0]))
     expression = remove_whitespace(express)
+    expression = clean_special(expression)
     expression = split_expression(expression)
     expression = validate_comments(expression)
     expression = check_floats(expression)
@@ -236,11 +245,10 @@ def runner(expression='', file=''):
     vertices = []
     edges = []
     traverse_tree(match_table, vertices, edges)
-    #render_graph(vertices, edges)
+    # render_graph(vertices, edges)
     write_to_xml(match_table.children[1])
     print("Written to XML")
     return
-
 
 # if __name__ == '__main__':
 #     runner()

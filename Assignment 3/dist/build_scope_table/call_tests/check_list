@@ -1,9 +1,0 @@
-t1 - call child proc
-t2 - call grandchild proc -- error
-t3 - proc calls sibling
-t4 - proc calls parent -- error
-t5 - nested call grandchild -- error
-t6 - self recursion
-t7 - uncle call -- error
-t8 - nephew call -- error
-t9 - cousin -- error

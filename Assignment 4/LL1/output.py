@@ -25,6 +25,10 @@ def traverse_tree(current_node: NT_node | T_node, file, indents):
         return
 
     else:
+        if current_node.label == '<(':
+            current_node.label = '&lt;('
+        if current_node.label == '>(':
+            current_node.label = '&gt;('
         file.write(indents + f'<terminal id=\'{current_node.id}\'>{current_node.label}</terminal>\n')
 
 

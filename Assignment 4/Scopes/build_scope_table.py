@@ -30,7 +30,7 @@ def build_assigned_var(sub_tree: {}, var_table: VariableTable):
         variable = variable['MORE']['DIGITS']
     var += variable['D']['terminal']['#text']
 
-    var_table.add_var(Variable(var, var_id, "", 0, True))
+    var_table.add_var(Variable(var, var_id, "", 0, False))
 
     return 0
 

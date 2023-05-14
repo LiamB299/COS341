@@ -47,9 +47,10 @@ class VariableTable:
             name1, id1 = var1.get_name_id()
             for var2 in self.variables:
                 name2, id2 = var2.get_name_id()
-                if name1 == name2 and id1 == id2:
+                if name1 == name2:
                     break
-            self.variables.append(var1)
+            if not(name1 == name2):
+                self.variables.append(var1)
 
     def get_vars(self):
         return self.variables
@@ -65,9 +66,13 @@ class VariableTable:
             name1, id1 = var1.get_name_id()
             for var2 in table2:
                 name2, id2 = var2.get_name_id()
-                if name1 == name2 and id1 == id2:
+                if name1 == name2:
                     new_table.append(Variable(name1, id1, 0, '', var1.is_defined() and var2.is_defined()))
+                    break
         return new_table
+
+    def clear_table(self):
+        self.variables = []
 
     def add_var(self, var: Variable):
         comp_var: Variable
@@ -88,7 +93,7 @@ class VariableTable:
     def is_defined(self, name: str, id: int):
         id = int(id)
         for var in self.variables:
-            if var.label == name and var.id == id:
+            if var.label == name: #and var.id == id:
                 return var.defined
         return False
 
@@ -140,7 +145,7 @@ class ProcedureTable:
     def __init__(self):
         self.procs = []
 
-    def find_proc(self, name: str, scope: int):
+    def find_call_proc(self, name: str, scope: int):
         scope = int(scope)
         sibling_proc: Procedure
         for proc in self.procs:
