@@ -1,0 +1,14 @@
+g n3;
+o n3;
+n12:=-1.22;
+b11:=F;
+s332:="stringstringstr";
+w(T){n12:=2.35};
+i(F)t{b11:=T}e{b11:=F};
+cp151;
+n4:=0.00;
+h,
+p151{
+    rs332 * commentcomment*;
+    i(b11)t{b11:=F}e{b11:=T}
+}
