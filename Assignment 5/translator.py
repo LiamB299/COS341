@@ -400,9 +400,12 @@ def translator(tree: dict, current_node: str):
 
 def runner():
     # try:
-    ast_tree = process_tree('test6')
+    ast_tree = process_tree('text_files/t10.txt')
 
     code = translator(ast_tree, 'PROGR')
+    if code.find('END') < 0:
+        code += 'END\n'
+
     print(code)
 
     b_trans = basic_translator.BasicTranslator(code)

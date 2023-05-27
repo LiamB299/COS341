@@ -1,5 +1,5 @@
 s1:="Hellooooooooooo";
-n1:=12345.00;
+n1:=1.00;
 b1:=T;
 s2:="Hellooooooooooo";
 n2:=n1;
@@ -10,7 +10,7 @@ w(>(n3, 0.00))
   {
     n2 := m(n2, n3);
     n3 := a(n3, -1.00);
-    rs1
+    on2
   };
 
 i(E(n3, 0.00)) t

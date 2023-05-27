@@ -1,7 +1,7 @@
 from LL1.parse_tree import *
 from LL1.LL1_table import *
 import re
-from LL1.render_tree import *
+# from LL1.render_tree import *
 import os
 from LL1.output import write_to_xml
 

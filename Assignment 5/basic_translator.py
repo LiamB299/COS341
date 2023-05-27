@@ -107,6 +107,9 @@ class BasicTranslator:
         self._define_line_numbers()
         self._remove_labels()
         self._update_gotos_lines()
+        for line_number, line in self.ordered_source.items():
+            print(line_number, line)
+
         self.remove_ends()
         self._remove_subs()
         self._update_subs_lines()
