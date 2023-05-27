@@ -303,39 +303,39 @@ def runner(filename: str):
     global ast_tree
     global proc_table
 
-    # try:
-    var_table, proc_table = build_scope(filename)
-    ast_tree = parser.read_tree('output.xml')
+    try:
+        var_table, proc_table = build_scope(filename)
+        ast_tree = parser.read_tree('output.xml')
 
-        # Rule 24 - prune tree for halts
-    skip_list = []
-    pruned_ast_tree = prune_tree(ast_tree, 'PROGR', skip_list)
+            # Rule 24 - prune tree for halts
+        skip_list = []
+        pruned_ast_tree = prune_tree(ast_tree, 'PROGR', skip_list)
 
-        # Build Proc list
-    build_proc_list(ast_tree, 'PROGR')
+            # Build Proc list
+        build_proc_list(ast_tree, 'PROGR')
 
-    var_table.clear_table()
+        var_table.clear_table()
 
-        # Parse for vars
-    print('Build Vars')
-    parse_vars(ast_tree, 'PROGR', var_table, False, 0)
+            # Parse for vars
+        print('Build Vars')
+        parse_vars(ast_tree, 'PROGR', var_table, False, 0)
 
-        # # Print HTML
-        # writer = HtmlWriter()
-        # writer.write_procs(proc_table)
-        # writer.write_vars(var_table)
-        # del writer
-        # print('Variables processed')
+            # # Print HTML
+            # writer = HtmlWriter()
+            # writer.write_procs(proc_table)
+            # writer.write_vars(var_table)
+            # del writer
+            # print('Variables processed')
+            # input('\nPress enter to close')
+
+        return ast_tree
+
+    except Exception as e:
+        # print('\nProcessing Error')
+        # # print('This probably fell through from an error above')
+        # print(e)
         # input('\nPress enter to close')
-
-    return ast_tree
-
-    # except Exception as e:
-    #     # print('\nProcessing Error')
-    #     # # print('This probably fell through from an error above')
-    #     # print(e)
-    #     # input('\nPress enter to close')
-    #     raise e
+        raise e
 
 
 # if __name__ == '__main__':

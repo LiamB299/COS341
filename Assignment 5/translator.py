@@ -399,26 +399,26 @@ def translator(tree: dict, current_node: str):
 
 
 def runner():
-    # try:
-    ast_tree = process_tree('text_files/t10.txt')
+    try:
+        ast_tree = process_tree('text_files/t10.txt')
 
-    code = translator(ast_tree, 'PROGR')
-    if code.find('END') < 0:
-        code += 'END\n'
+        code = translator(ast_tree, 'PROGR')
+        if code.find('END') < 0:
+            code += 'END\n'
 
-    print(code)
+        print(code)
 
-    b_trans = basic_translator.BasicTranslator(code)
-    b_trans.printer()
+        b_trans = basic_translator.BasicTranslator(code)
+        b_trans.printer()
 
-        # except Exception as e:
-        #     print(e)
+            # except Exception as e:
+            #     print(e)
 
-    return 0
-    # except Exception as e:
-    #     print("Processing Error")
-    #     print(e)
-    #     input("Press Enter to close")
+        return 0
+    except Exception as e:
+        print("Processing Error")
+        print(e)
+        input("Press Enter to close")
 
 
 if __name__ == '__main__':
