@@ -107,13 +107,14 @@ class BasicTranslator:
         self._define_line_numbers()
         self._remove_labels()
         self._update_gotos_lines()
-        for line_number, line in self.ordered_source.items():
-            print(line_number, line)
-
         self.remove_ends()
         self._remove_subs()
         self._update_subs_lines()
         self._remove_empty_lines()
         self._update_var_names()
-        for line_number, line in self.ordered_source.items():
-            print(line_number, line)
+
+        with open('basic.txt', 'w+') as open_file:
+            for line_number, line in self.ordered_source.items():
+                open_file.write(f'{line_number} {line}\n')
+
+

@@ -400,16 +400,21 @@ def translator(tree: dict, current_node: str):
 
 def runner():
     try:
-        ast_tree = process_tree('text_files/t10.txt')
+        ast_tree = process_tree('')
 
         code = translator(ast_tree, 'PROGR')
         if code.find('END') < 0:
             code += 'END\n'
 
+        print("Intermediate Code:\n")
         print(code)
+        print('')
 
         b_trans = basic_translator.BasicTranslator(code)
         b_trans.printer()
+
+        print('Basic written to basic.txt')
+        input('Press enter to close')
 
             # except Exception as e:
             #     print(e)
