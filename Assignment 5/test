@@ -1,14 +1,14 @@
 g n3;
 o n3;
-n12:=-1.22;
-b11:=F;
-s332:="stringstringstr";
-w(T){n12:=2.35};
-i(F)t{b11:=T}e{b11:=F};
+i(>(n3,0.00))t{s11:="biggerthanzero "}e{s11:="smallerthanzero"};
 cp151;
-n4:=0.00;
-h,
+i(b11)t{rs11}e{rs11};
+cp152,
 p151{
-    rs332 * commentcomment*;
-    i(b11)t{b11:=F}e{b11:=T}
+    s23:="calling subproc";
+    rs23 * commentcomment*;
+    i(>(n3,0.00))t{b11:=T}e{b11:=F}
+},
+p152{
+    b123:=T
 }

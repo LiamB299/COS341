@@ -1,7 +1,7 @@
 import basic_translator
 from definitions import non_terminals
 from read_xml import read_tree
-from Scopes.build_scope_table import runner as build_scope
+from Variable_checker.parse_vars import runner as process_tree
 
 line_number = 00
 label_counter = 00
@@ -86,7 +86,7 @@ def translate_stri(tree: dict):
             stringv += char['terminal']['value']
         else:
             stringv += " "
-    return f's{stringv}'
+    return f'{stringv}'
 
 
 def translate_comment(tree: dict):
@@ -216,6 +216,8 @@ def translate_branch(tree: dict):
     label_1 = f'label_then_{label_counter}'
     label_2 = f'label_else_{label_counter+1}'
     cond_code = translate_logic_cond(tree['BOOLEXPR'], label_1, label_2)
+    if cond_code.find('IF') < 0 and cond_code[0] == 'b':
+        cond_code = f'IF {cond_code} = 1 THEN GOTO {label_1}'
     algo_code = translator(tree['ALGO'], 'ALGO')
     if 'ELSE' in tree:
         label_3 = f'label_after_{label_counter+2}'
@@ -224,11 +226,11 @@ def translate_branch(tree: dict):
 
         code = f'''
 {cond_code}
-{label_1}:
-{algo_code}
-GOTO {label_3}
 {label_2}:
 {else_code}
+GOTO {label_3}
+{label_1}:
+{algo_code}
 {label_3}:
 '''
         label_counter += 3
@@ -315,7 +317,7 @@ def translate_expression(tree: dict, expression_type: str, boolname= ''):
             if 'terminal' in tree['LOGIC'] and isinstance(tree['LOGIC']['terminal'], dict):
                 state = tree['LOGIC']['terminal']['value']
                 if state == 'F':
-                    return f'b{boolname} = 0'
+                    return f'{boolname} = 0'
                 else:
                     return f'{boolname} = 1'
             elif 'BOOLVAR' in tree['LOGIC']:
@@ -378,6 +380,7 @@ def translator(tree: dict, current_node: str):
         source_code += translator(tree['PROGR']['ALGO'], 'ALGO')
 
     if 'PROGR' in tree and 'PROCDEFS' in tree['PROGR']:
+        source_code += 'END\n'
         source_code += translator(tree['PROGR']['PROCDEFS'], 'PROCDEFS')
 
     return source_code
@@ -396,21 +399,23 @@ def translator(tree: dict, current_node: str):
 
 
 def runner():
-
-    var_table, proc_table = build_scope('test2')
-    ast_tree = read_tree('output.xml')
+    # try:
+    ast_tree = process_tree('test6')
 
     code = translator(ast_tree, 'PROGR')
-    code += 'END\n'
     print(code)
 
     b_trans = basic_translator.BasicTranslator(code)
     b_trans.printer()
 
-    # except Exception as e:
-    #     print(e)
+        # except Exception as e:
+        #     print(e)
 
     return 0
+    # except Exception as e:
+    #     print("Processing Error")
+    #     print(e)
+    #     input("Press Enter to close")
 
 
 if __name__ == '__main__':
