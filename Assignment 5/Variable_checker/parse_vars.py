@@ -333,9 +333,10 @@ def runner(filename: str):
     except Exception as e:
         # print('\nProcessing Error')
         # # print('This probably fell through from an error above')
-        # print(e)
+        print(e)
         # input('\nPress enter to close')
-        raise e
+    finally:
+        return ast_tree
 
 
 # if __name__ == '__main__':

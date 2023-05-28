@@ -162,7 +162,7 @@ def translate_logic_cond(tree: dict, label_t: str, label_f: str):
         # 'expr' types
 
     if 'BOOLVAR' in tree['LOGIC']:
-            return f'b{build_var_name(tree["LOGIC"]["BOOLVAR"]["DIGITS"])}'
+        return f'b{build_var_name(tree["LOGIC"]["BOOLVAR"]["DIGITS"])}'
 
     elif 'terminal' in tree['LOGIC'] and isinstance(tree['LOGIC']['terminal'], dict):
         state = tree['LOGIC']['terminal']['value']
@@ -203,8 +203,8 @@ def check_boolvar(boolvar: str):
 def translate_loop(tree: dict):
     global label_counter
     label_check = f'check_while_label_{label_counter}'
-    label_2 = f'label_{label_counter+1}'
-    label_3 = f'label_{label_counter+2}'
+    label_2 = f'label_{label_counter + 1}'
+    label_3 = f'label_{label_counter + 2}'
     label_counter += 3
 
     cond_code = translate_logic_cond(tree['BOOLEXPR'], label_2, label_3)
@@ -226,13 +226,13 @@ def translate_branch(tree: dict):
     global label_counter
 
     label_1 = f'label_then_{label_counter}'
-    label_2 = f'label_else_{label_counter+1}'
+    label_2 = f'label_else_{label_counter + 1}'
     cond_code = translate_logic_cond(tree['BOOLEXPR'], label_1, label_2)
     if cond_code.find('IF') < 0 and cond_code[0] == 'b':
         cond_code = f'IF {cond_code} = 1 THEN GOTO {label_1}'
     algo_code = translator(tree['ALGO'], 'ALGO')
     if 'ELSE' in tree:
-        label_3 = f'label_after_{label_counter+2}'
+        label_3 = f'label_after_{label_counter + 2}'
         else_code = translator(tree['ELSE']['ALGO'], 'ALGO')
         label_counter += 2
 
@@ -256,7 +256,6 @@ GOTO {label_3}
 {label_2}:
 '''
 
-
     # cond_code = translate_logic(tree['BOOLEXPR'], 'BOOLEXPR')
     # algo_code = translator(tree['ALGO'], 'ALGO')
     #
@@ -267,12 +266,12 @@ GOTO {label_3}
     # label_after_else = f'after_else_{label_counter}'
     # label_counter += 1
 
-#     code = f'''IF {cond_code} THEN
-# {algo_code}
-# GOTO {label_after_else}
-# ENDIF
-# {else_code}
-# {label_after_else}:\n'''
+    #     code = f'''IF {cond_code} THEN
+    # {algo_code}
+    # GOTO {label_after_else}
+    # ENDIF
+    # {else_code}
+    # {label_after_else}:\n'''
 
     return code
 
@@ -297,7 +296,7 @@ END SUB\n
 
 
 # instructions contain expressions
-def translate_expression(tree: dict, expression_type: str, boolname= ''):
+def translate_expression(tree: dict, expression_type: str, boolname=''):
     global label_counter
     code = ''
 
@@ -337,7 +336,7 @@ def translate_expression(tree: dict, expression_type: str, boolname= ''):
                 return f'{boolname} = b{build_var_name(tree["LOGIC"]["BOOLVAR"]["DIGITS"])}'
             else:
                 label_1 = f"label_{label_counter}"
-                label_2 = f"label_{label_counter+1}"
+                label_2 = f"label_{label_counter + 1}"
                 cond_code = translate_logic_cond(tree, label_1, label_2)
                 return f"{boolname}=0\n{cond_code}\n{label_1}\n{boolname}=1\n{label_2}:"
 
@@ -413,7 +412,7 @@ def translator(tree: dict, current_node: str):
 
 def runner():
     try:
-        ast_tree = process_tree('text_files/test9')
+        ast_tree = process_tree('')
 
         code = translator(ast_tree, 'PROGR')
         if code.find('END') < 0:
@@ -427,16 +426,13 @@ def runner():
         b_trans.printer()
 
         print('Basic written to basic.txt')
-        # input('Press enter to close')
-
-            # except Exception as e:
-            #     print(e)
+        input('Press enter to close')
 
         return 0
     except Exception as e:
         print("Processing Error")
         print(e)
-        input("Press Enter to close")
+        input("Press Enter to close\n")
 
 
 if __name__ == '__main__':
