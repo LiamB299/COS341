@@ -1,0 +1,14 @@
+g n3;
+o n3;
+i(>(n3,0.00))t{s11:="biggerthanzero "}e{s11:="smallerthanzero"};
+cp151;
+i(b11)t{rs11}e{rs11};
+cp152,
+p151{
+    s23:="calling subproc";
+    rs23 * commentcomment*;
+    i(>(n3,0.00))t{b11:=T}e{b11:=F}
+},
+p152{
+    b123:=T
+}

@@ -1,3 +1,5 @@
+import re
+
 import basic_translator
 from definitions import non_terminals
 from read_xml import read_tree
@@ -179,13 +181,23 @@ def translate_logic_cond(tree: dict, label_t: str, label_f: str):
         if op == '^':
             code1 = translate_logic_cond(tree['LOGIC']['BOOLEXPR'][0], new_label, label_f)
             code2 = translate_logic_cond(tree['LOGIC']['BOOLEXPR'][1], label_t, label_f)
-            return f"{code1}\n{new_label}\n{code2}"
+            return f"{check_boolvar(code1)}\n{new_label}\n{check_boolvar(code2)}"
         elif op == 'v':
             code1 = translate_logic_cond(tree['LOGIC']['BOOLEXPR'][0], label_t, new_label)
             code2 = translate_logic_cond(tree['LOGIC']['BOOLEXPR'][1], label_t, label_f)
-            return f"{code1}\n{new_label}\n{code2}"
+            return f"{check_boolvar(code1)}\n{new_label}\n{check_boolvar(code2)}"
         else:
             raise Exception('No logic operator found')
+
+
+def check_boolvar(boolvar: str):
+    pattern = r'^b\d+$'
+
+    match = re.match(pattern, boolvar)
+
+    if match:
+        return f'{boolvar} = {boolvar}'
+    return boolvar
 
 
 def translate_loop(tree: dict):
@@ -312,7 +324,8 @@ def translate_expression(tree: dict, expression_type: str, boolname= ''):
 
     elif expression_type == 'BOOLEXPR':
         if 'CMPR' in tree:
-            code = translate_cmpr(tree['CMPR'])
+            # TODO check!!!
+            code = f'{boolname} = {translate_cmpr(tree["CMPR"])}'
         if 'LOGIC' in tree:
             if 'terminal' in tree['LOGIC'] and isinstance(tree['LOGIC']['terminal'], dict):
                 state = tree['LOGIC']['terminal']['value']
@@ -400,7 +413,7 @@ def translator(tree: dict, current_node: str):
 
 def runner():
     try:
-        ast_tree = process_tree('')
+        ast_tree = process_tree('text_files/test9')
 
         code = translator(ast_tree, 'PROGR')
         if code.find('END') < 0:
@@ -414,7 +427,7 @@ def runner():
         b_trans.printer()
 
         print('Basic written to basic.txt')
-        input('Press enter to close')
+        # input('Press enter to close')
 
             # except Exception as e:
             #     print(e)
